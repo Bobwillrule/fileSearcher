@@ -1,0 +1,6 @@
+{
+  "name": "filesearcher",
+  "version-string": "0.1.0",
+  "builtin-baseline": "19e7a138440f005fea23d92b19df87f8040e66c1",
+  "dependencies": ["hnswlib", "catch2", {"name": "libzip", "default-features": false}]
+}

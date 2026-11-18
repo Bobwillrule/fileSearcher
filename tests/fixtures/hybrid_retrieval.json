@@ -1,0 +1,523 @@
+{
+  "description": "Phase 6 fixed synthetic project acceptance set; not a general benchmark. Split and labels pinned before scoring.",
+  "documents": [
+    {
+      "id": "algorithms",
+      "filename": "lecture19.md",
+      "text": "The Master Theorem solves divide-and-conquer recurrence relations such as T(n)=aT(n/b)+f(n). Compare the cost of subproblems with the work at each level to obtain asymptotic runtime bounds. This algorithms lecture covers recursion trees and complexity analysis."
+    },
+    {
+      "id": "diodes",
+      "filename": "semiconductor_lab.txt",
+      "text": "A semiconductor diode conducts current in the forward direction and blocks reverse current. A bridge rectifier uses four diodes to convert alternating current into direct current. The experiment measures the silicon junction voltage drop."
+    },
+    {
+      "id": "vga",
+      "filename": "display_controller.cpp",
+      "text": "FPGA VGA display controller project. Horizontal and vertical synchronization pulses coordinate a raster monitor. Pixel counters track visible scanlines and blanking intervals; the design outputs red green and blue channels."
+    },
+    {
+      "id": "resume",
+      "filename": "google_resume.md",
+      "text": "Curriculum vitae submitted for the Google software engineering internship. Education in computer science, C++ projects, collaborative development experience and programming language skills. This version emphasizes search systems and digital logic."
+    },
+    {
+      "id": "invoice",
+      "filename": "invoice_103.txt",
+      "text": "Paid invoice for a replacement laptop battery. Supplier North Shore Electronics. Amount 89 dollars, transaction date March 12. Retain this receipt as proof of purchase for warranty claims."
+    },
+    {
+      "id": "battery",
+      "filename": "battery_experiment.md",
+      "text": "Lithium ion battery discharge experiment. Record voltage against time under a constant current load, estimate capacity in milliamp hours, and compare measured energy with the rated specification. This is an electrical laboratory report, not a sales receipt."
+    },
+    {
+      "id": "sorting",
+      "filename": "sorting_notes.txt",
+      "text": "Comparison sorting algorithms: quicksort partitions around a pivot, mergesort combines sorted runs, and heapsort maintains a binary heap. Discuss stable ordering, worst-case complexity and additional memory requirements."
+    },
+    {
+      "id": "graphs",
+      "filename": "route_algorithms.md",
+      "text": "Dijkstra shortest path algorithm maintains tentative distances in a priority queue and relaxes graph edges with nonnegative weights. Breadth first search finds the fewest edges in an unweighted graph. Applications include road navigation."
+    },
+    {
+      "id": "dynamic",
+      "filename": "knapsack_homework.txt",
+      "text": "Dynamic programming solution for the zero one knapsack problem. A table stores the maximum value achievable for each prefix of items and remaining weight capacity. Memoization avoids repeatedly solving overlapping subproblems."
+    },
+    {
+      "id": "network",
+      "filename": "tcp_transport.md",
+      "text": "TCP provides reliable ordered byte streams over IP. Sequence numbers, acknowledgments and retransmission recover lost packets. Congestion control adjusts the sending window. UDP is connectionless and does not guarantee delivery."
+    },
+    {
+      "id": "database",
+      "filename": "sql_transactions.txt",
+      "text": "Database transactions follow atomicity consistency isolation and durability. SQLite write ahead logging permits concurrent readers while one writer commits changes. Prepared statements bind parameters instead of interpolating user input."
+    },
+    {
+      "id": "threads",
+      "filename": "cpp_concurrency.md",
+      "text": "C++ concurrency tutorial using std::thread, mutex locks and atomic variables. A data race occurs when unsynchronized threads access shared mutable memory. Lock ordering prevents deadlocks; condition variables coordinate producer consumer queues."
+    },
+    {
+      "id": "memory",
+      "filename": "smart_pointers.cpp",
+      "text": "C++ ownership examples using unique_ptr and shared_ptr. RAII ties resource lifetime to object scope, automatically releasing memory when destructors run. Weak references avoid reference counting cycles."
+    },
+    {
+      "id": "git",
+      "filename": "branch_workflow.md",
+      "text": "Git branching guide: create a feature branch, commit isolated changes, and open a pull request. Rebase replays commits on another base. Resolve merge conflicts by examining both revisions before staging the result."
+    },
+    {
+      "id": "testing",
+      "filename": "unit_test_plan.txt",
+      "text": "Software testing strategy using deterministic unit tests, integration checks and regression fixtures. Mock external dependencies when isolating logic. Property based testing explores invariants over generated inputs rather than one example."
+    },
+    {
+      "id": "linear",
+      "filename": "matrix_lecture.md",
+      "text": "Linear algebra lecture on eigenvalues and eigenvectors. A matrix transforms an eigenvector by a scalar factor without changing its direction. Diagonalization decomposes a matrix into a change of basis and a diagonal matrix."
+    },
+    {
+      "id": "probability",
+      "filename": "bayes_notes.txt",
+      "text": "Bayes theorem updates a prior probability using observed evidence and the likelihood of that evidence under each hypothesis. The posterior distribution normalizes the product of likelihood and prior. Conditional independence simplifies inference."
+    },
+    {
+      "id": "calculus",
+      "filename": "integration_review.md",
+      "text": "Integration review: substitution reverses the chain rule, integration by parts follows the product rule, and definite integrals measure signed area under a curve. Evaluate boundary terms carefully when applying the fundamental theorem of calculus."
+    },
+    {
+      "id": "lease",
+      "filename": "apartment_lease.txt",
+      "text": "Residential apartment lease agreement. Monthly rent is due on the first day of each month. The tenant pays a refundable security deposit and must give written notice before ending occupancy. Includes landlord contact details and maintenance obligations."
+    },
+    {
+      "id": "travel",
+      "filename": "flight_booking.md",
+      "text": "Flight booking confirmation for Vancouver to Tokyo. Departure from YVR and arrival at Narita airport. Includes reservation reference, baggage allowance, seat assignment and check in instructions for the outbound journey."
+    },
+    {
+      "id": "meeting",
+      "filename": "team_minutes.txt",
+      "text": "Project team meeting minutes. Agreed to ship the prototype after accessibility review. Maya owns keyboard navigation, Leo investigates search latency, and the next milestone is a usable desktop demonstration. Action items have owners and due dates."
+    },
+    {
+      "id": "budget",
+      "filename": "monthly_budget.csv",
+      "text": "Personal monthly budget spreadsheet. Categories include rent, groceries, utilities, transport and savings. Compare actual spending against planned amounts to identify overspending and determine the remaining balance."
+    },
+    {
+      "id": "interview",
+      "filename": "interview_practice.md",
+      "text": "Technical interview preparation with practice questions about arrays, hash maps, binary trees and system design. Explain tradeoffs aloud, clarify constraints with the interviewer, and test edge cases before finalizing the answer."
+    },
+    {
+      "id": "scholarship",
+      "filename": "scholarship_form.txt",
+      "text": "University scholarship application. Applicants provide an academic transcript, a personal statement, two recommendation letters and evidence of community volunteering. Selection considers academic achievement and financial need."
+    },
+    {
+      "id": "filter",
+      "filename": "signal_filter.md",
+      "text": "Digital signal processing notes about low pass and high pass filters. A finite impulse response convolution smooths noisy measurements. The cutoff frequency separates the passband from attenuated frequencies."
+    },
+    {
+      "id": "amplifier",
+      "filename": "opamp_lab.txt",
+      "text": "Operational amplifier laboratory. An inverting amplifier uses a feedback resistor and input resistor to set negative voltage gain. Negative feedback stabilizes the output. Measure saturation near the supply rails."
+    },
+    {
+      "id": "security",
+      "filename": "password_storage.md",
+      "text": "Password storage design using salted Argon2 hashes. Each account has a unique random salt; a memory hard derivation function makes offline guessing expensive. Never store passwords as plaintext or use reversible encryption for password verification."
+    },
+    {
+      "id": "backup",
+      "filename": "backup_policy.txt",
+      "text": "Backup policy follows the three two one rule: three copies, two media types and one offsite copy. Keep version history and regularly test restoration. Incremental backups copy changes since the previous run."
+    },
+    {
+      "id": "camera",
+      "filename": "exposure_notes.md",
+      "text": "Photography notes on aperture, shutter speed and ISO. A wider aperture admits more light and creates a shallower depth of field. Slow shutter speeds blur motion, while higher ISO amplifies noise in dim conditions."
+    },
+    {
+      "id": "exercise",
+      "filename": "training_schedule.txt",
+      "text": "Running training schedule with easy aerobic sessions, interval workouts and recovery days. Increase weekly mileage gradually and take rest days between hard efforts. Record distance, duration and perceived effort after each session."
+    }
+  ],
+  "queries": [
+    {
+      "text": "How do I work out the running time of recursive divide and conquer code?",
+      "relevant": [
+        "algorithms"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "Which component lets electricity pass in just one direction?",
+      "relevant": [
+        "diodes"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "My programmable logic project that drives a computer monitor",
+      "relevant": [
+        "vga"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "The CV I sent when applying for a developer placement at Google",
+      "relevant": [
+        "resume"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "Proof that I paid for a new notebook computer battery",
+      "relevant": [
+        "invoice"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "Measurements of how long a rechargeable cell lasts under load",
+      "relevant": [
+        "battery"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "Which ordering algorithm divides elements around a pivot?",
+      "relevant": [
+        "sorting"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "Finding the cheapest route through weighted connections",
+      "relevant": [
+        "graphs"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "Homework choosing valuable objects that fit in a bag with a weight limit",
+      "relevant": [
+        "dynamic"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "Why does the internet transport protocol resend missing packets?",
+      "relevant": [
+        "network"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "Notes on all or nothing updates and durable database commits",
+      "relevant": [
+        "database"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "Preventing two execution threads from changing shared data at once",
+      "relevant": [
+        "threads"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "C++ objects that free allocated resources when leaving scope",
+      "relevant": [
+        "memory"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "Instructions for reconciling conflicting edits in version control",
+      "relevant": [
+        "git"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "Checking that an old software bug never returns after a change",
+      "relevant": [
+        "testing"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "Vectors whose direction stays the same after a matrix transformation",
+      "relevant": [
+        "linear"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "Updating a belief after observing new evidence",
+      "relevant": [
+        "probability"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "How to calculate the area underneath a mathematical curve",
+      "relevant": [
+        "calculus"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "My rental contract describing the damage deposit and move out notice",
+      "relevant": [
+        "lease"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "My plane reservation from Canada to Japan",
+      "relevant": [
+        "travel"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "Who was assigned to fix keyboard navigation at our project meeting?",
+      "relevant": [
+        "meeting"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "A breakdown of my household spending against planned amounts",
+      "relevant": [
+        "budget"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "Preparing to answer coding questions during a hiring conversation",
+      "relevant": [
+        "interview"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "The student funding application requiring references and grades",
+      "relevant": [
+        "scholarship"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "Removing rapid noise from a sampled sensor signal",
+      "relevant": [
+        "filter"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "Lab circuit that magnifies a voltage using negative feedback",
+      "relevant": [
+        "amplifier"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "Protecting account secrets with slow salted one way hashing",
+      "relevant": [
+        "security"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "Recovering lost data from multiple copies including one kept elsewhere",
+      "relevant": [
+        "backup"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "Why moving subjects look blurry when I take pictures in low light",
+      "relevant": [
+        "camera"
+      ],
+      "kind": "paraphrase",
+      "split": "dev"
+    },
+    {
+      "text": "My plan for jogging workouts with recovery days between hard efforts",
+      "relevant": [
+        "exercise"
+      ],
+      "kind": "paraphrase",
+      "split": "heldout"
+    },
+    {
+      "text": "lecture19.md",
+      "relevant": [
+        "algorithms"
+      ],
+      "kind": "filename",
+      "split": "dev"
+    },
+    {
+      "text": "google_resume.md",
+      "relevant": [
+        "resume"
+      ],
+      "kind": "filename",
+      "split": "heldout"
+    },
+    {
+      "text": "invoice_103.txt",
+      "relevant": [
+        "invoice"
+      ],
+      "kind": "filename",
+      "split": "dev"
+    },
+    {
+      "text": "knapsack_homework.txt",
+      "relevant": [
+        "dynamic"
+      ],
+      "kind": "filename",
+      "split": "heldout"
+    },
+    {
+      "text": "cpp_concurrency.md",
+      "relevant": [
+        "threads"
+      ],
+      "kind": "filename",
+      "split": "dev"
+    },
+    {
+      "text": "matrix_lecture.md",
+      "relevant": [
+        "linear"
+      ],
+      "kind": "filename",
+      "split": "heldout"
+    },
+    {
+      "text": "flight_booking.md",
+      "relevant": [
+        "travel"
+      ],
+      "kind": "filename",
+      "split": "dev"
+    },
+    {
+      "text": "signal_filter.md",
+      "relevant": [
+        "filter"
+      ],
+      "kind": "filename",
+      "split": "heldout"
+    },
+    {
+      "text": "battery documents",
+      "relevant": [
+        "invoice",
+        "battery"
+      ],
+      "kind": "ambiguous",
+      "split": "dev"
+    },
+    {
+      "text": "algorithm course material",
+      "relevant": [
+        "algorithms",
+        "sorting",
+        "graphs",
+        "dynamic"
+      ],
+      "kind": "ambiguous",
+      "split": "heldout"
+    },
+    {
+      "text": "job application preparation",
+      "relevant": [
+        "resume",
+        "interview"
+      ],
+      "kind": "ambiguous",
+      "split": "dev"
+    },
+    {
+      "text": "electronic circuits",
+      "relevant": [
+        "diodes",
+        "amplifier"
+      ],
+      "kind": "ambiguous",
+      "split": "heldout"
+    },
+    {
+      "text": "chocolate souffle baking recipe",
+      "relevant": [],
+      "kind": "negative",
+      "split": "dev"
+    },
+    {
+      "text": "medieval royal family genealogy",
+      "relevant": [],
+      "kind": "negative",
+      "split": "heldout"
+    },
+    {
+      "text": "marine coral reef biodiversity survey",
+      "relevant": [],
+      "kind": "negative",
+      "split": "dev"
+    },
+    {
+      "text": "volcanic magma mineral composition",
+      "relevant": [],
+      "kind": "negative",
+      "split": "heldout"
+    }
+  ]
+}

@@ -1,0 +1,1107 @@
+{
+    "documents": 30,
+    "hybrid": {
+        "exact_top1": 1,
+        "mrr": 0.9761904761904762,
+        "negative_empty_rate": 1,
+        "paraphrase_mrr": 0.9833333333333333,
+        "positives": 42,
+        "recall_at_10": 0.9821428571428571
+    },
+    "lexical": {
+        "exact_top1": 1,
+        "mrr": 0.8412698412698412,
+        "negative_empty_rate": 1,
+        "paraphrase_mrr": 0.8277777777777777,
+        "positives": 42,
+        "recall_at_10": 0.8988095238095238
+    },
+    "lexical_latency": {
+        "median_ms": 4.6742,
+        "p95_ms": 7.2383,
+        "samples": 46
+    },
+    "original_absolute_gain_met": true,
+    "partitions": {
+        "dev": {
+            "hybrid": {
+                "exact_top1": 1,
+                "mrr": 0.9761904761904762,
+                "negative_empty_rate": 1,
+                "paraphrase_mrr": 1,
+                "positives": 21,
+                "recall_at_10": 1
+            },
+            "lexical": {
+                "exact_top1": 1,
+                "mrr": 0.9087301587301588,
+                "negative_empty_rate": 1,
+                "paraphrase_mrr": 0.9055555555555556,
+                "positives": 21,
+                "recall_at_10": 0.9761904761904762
+            },
+            "original_absolute_gain_met": false,
+            "passed": true
+        },
+        "heldout": {
+            "hybrid": {
+                "exact_top1": 1,
+                "mrr": 0.9761904761904762,
+                "negative_empty_rate": 1,
+                "paraphrase_mrr": 0.9666666666666667,
+                "positives": 21,
+                "recall_at_10": 0.9642857142857143
+            },
+            "lexical": {
+                "exact_top1": 1,
+                "mrr": 0.7738095238095238,
+                "negative_empty_rate": 1,
+                "paraphrase_mrr": 0.75,
+                "positives": 21,
+                "recall_at_10": 0.8214285714285714
+            },
+            "original_absolute_gain_met": true,
+            "passed": true
+        }
+    },
+    "passed": true,
+    "persistent_worker_harness_latency": {
+        "median_ms": 18.2395,
+        "p95_ms": 22.1494,
+        "samples": 46
+    },
+    "production_session_latency_including_first_cold_query": {
+        "median_ms": 19.1002,
+        "p95_ms": 24.8557,
+        "samples": 46
+    },
+    "production_worker_starts": 1,
+    "queries": 46,
+    "results": [
+        {
+            "hybrid": [
+                "algorithms",
+                "sorting",
+                "dynamic",
+                "interview",
+                "graphs",
+                "exercise",
+                "battery"
+            ],
+            "lexical": [
+                "algorithms",
+                "exercise",
+                "battery"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "algorithms"
+                ],
+                "split": "dev",
+                "text": "How do I work out the running time of recursive divide and conquer code?"
+            },
+            "retrieval_ms": 8.9819
+        },
+        {
+            "hybrid": [
+                "diodes",
+                "filter",
+                "backup",
+                "linear",
+                "database",
+                "testing",
+                "dynamic"
+            ],
+            "lexical": [
+                "filter",
+                "backup",
+                "linear",
+                "diodes",
+                "database",
+                "testing",
+                "dynamic"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "diodes"
+                ],
+                "split": "heldout",
+                "text": "Which component lets electricity pass in just one direction?"
+            },
+            "retrieval_ms": 6.5144
+        },
+        {
+            "hybrid": [
+                "vga",
+                "meeting",
+                "resume",
+                "testing"
+            ],
+            "lexical": [
+                "vga",
+                "resume",
+                "testing",
+                "meeting"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "vga"
+                ],
+                "split": "dev",
+                "text": "My programmable logic project that drives a computer monitor"
+            },
+            "retrieval_ms": 9.4252
+        },
+        {
+            "hybrid": [
+                "resume",
+                "calculus",
+                "memory",
+                "testing",
+                "threads"
+            ],
+            "lexical": [
+                "calculus",
+                "resume",
+                "memory",
+                "testing",
+                "threads"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "resume"
+                ],
+                "split": "heldout",
+                "text": "The CV I sent when applying for a developer placement at Google"
+            },
+            "retrieval_ms": 10.4761
+        },
+        {
+            "hybrid": [
+                "invoice",
+                "resume",
+                "battery"
+            ],
+            "lexical": [
+                "invoice",
+                "resume",
+                "battery"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "invoice"
+                ],
+                "split": "dev",
+                "text": "Proof that I paid for a new notebook computer battery"
+            },
+            "retrieval_ms": 6.3925
+        },
+        {
+            "hybrid": [
+                "battery",
+                "diodes",
+                "invoice",
+                "filter",
+                "probability",
+                "calculus"
+            ],
+            "lexical": [
+                "battery",
+                "filter",
+                "probability",
+                "calculus"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "battery"
+                ],
+                "split": "heldout",
+                "text": "Measurements of how long a rechargeable cell lasts under load"
+            },
+            "retrieval_ms": 8.1596
+        },
+        {
+            "hybrid": [
+                "sorting",
+                "graphs",
+                "threads",
+                "algorithms",
+                "dynamic"
+            ],
+            "lexical": [
+                "sorting",
+                "graphs",
+                "threads"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "sorting"
+                ],
+                "split": "dev",
+                "text": "Which ordering algorithm divides elements around a pivot?"
+            },
+            "retrieval_ms": 7.7228
+        },
+        {
+            "hybrid": [
+                "graphs",
+                "dynamic",
+                "algorithms"
+            ],
+            "lexical": [
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "graphs"
+                ],
+                "split": "heldout",
+                "text": "Finding the cheapest route through weighted connections"
+            },
+            "retrieval_ms": 5.5431
+        },
+        {
+            "hybrid": [
+                "dynamic"
+            ],
+            "lexical": [
+                "dynamic"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "dynamic"
+                ],
+                "split": "dev",
+                "text": "Homework choosing valuable objects that fit in a bag with a weight limit"
+            },
+            "retrieval_ms": 6.5516
+        },
+        {
+            "hybrid": [
+                "network",
+                "budget"
+            ],
+            "lexical": [
+                "budget",
+                "network"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "network"
+                ],
+                "split": "heldout",
+                "text": "Why does the internet transport protocol resend missing packets?"
+            },
+            "retrieval_ms": 10.4402
+        },
+        {
+            "hybrid": [
+                "database",
+                "git",
+                "backup",
+                "dynamic",
+                "probability",
+                "filter",
+                "camera"
+            ],
+            "lexical": [
+                "database",
+                "probability",
+                "filter",
+                "git",
+                "camera"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "database"
+                ],
+                "split": "dev",
+                "text": "Notes on all or nothing updates and durable database commits"
+            },
+            "retrieval_ms": 10.1474
+        },
+        {
+            "hybrid": [
+                "threads",
+                "memory",
+                "database",
+                "sorting",
+                "backup",
+                "linear",
+                "scholarship"
+            ],
+            "lexical": [
+                "threads",
+                "backup",
+                "linear",
+                "scholarship",
+                "memory"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "threads"
+                ],
+                "split": "heldout",
+                "text": "Preventing two execution threads from changing shared data at once"
+            },
+            "retrieval_ms": 6.7859
+        },
+        {
+            "hybrid": [
+                "memory",
+                "threads",
+                "dynamic",
+                "linear",
+                "resume",
+                "testing",
+                "calculus"
+            ],
+            "lexical": [
+                "memory",
+                "threads",
+                "resume",
+                "testing",
+                "calculus"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "memory"
+                ],
+                "split": "dev",
+                "text": "C++ objects that free allocated resources when leaving scope"
+            },
+            "retrieval_ms": 8.8241
+        },
+        {
+            "hybrid": [
+                "backup",
+                "git",
+                "interview",
+                "database",
+                "testing",
+                "network",
+                "travel",
+                "resume"
+            ],
+            "lexical": [
+                "network",
+                "travel",
+                "resume",
+                "backup"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "git"
+                ],
+                "split": "heldout",
+                "text": "Instructions for reconciling conflicting edits in version control"
+            },
+            "retrieval_ms": 6.4356
+        },
+        {
+            "hybrid": [
+                "testing",
+                "linear",
+                "security",
+                "resume",
+                "exercise",
+                "meeting"
+            ],
+            "lexical": [
+                "linear",
+                "security",
+                "resume",
+                "testing",
+                "exercise",
+                "meeting"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "testing"
+                ],
+                "split": "dev",
+                "text": "Checking that an old software bug never returns after a change"
+            },
+            "retrieval_ms": 8.2081
+        },
+        {
+            "hybrid": [
+                "linear",
+                "calculus",
+                "exercise",
+                "diodes",
+                "meeting"
+            ],
+            "lexical": [
+                "linear",
+                "exercise",
+                "diodes",
+                "meeting"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "linear"
+                ],
+                "split": "heldout",
+                "text": "Vectors whose direction stays the same after a matrix transformation"
+            },
+            "retrieval_ms": 9.1014
+        },
+        {
+            "hybrid": [
+                "probability",
+                "scholarship",
+                "exercise",
+                "meeting"
+            ],
+            "lexical": [
+                "probability",
+                "scholarship",
+                "exercise",
+                "meeting"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "probability"
+                ],
+                "split": "dev",
+                "text": "Updating a belief after observing new evidence"
+            },
+            "retrieval_ms": 5.9681
+        },
+        {
+            "hybrid": [
+                "calculus"
+            ],
+            "lexical": [
+                "calculus"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "calculus"
+                ],
+                "split": "heldout",
+                "text": "How to calculate the area underneath a mathematical curve"
+            },
+            "retrieval_ms": 5.8289
+        },
+        {
+            "hybrid": [
+                "lease"
+            ],
+            "lexical": [
+                "lease"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "lease"
+                ],
+                "split": "dev",
+                "text": "My rental contract describing the damage deposit and move out notice"
+            },
+            "retrieval_ms": 9.5809
+        },
+        {
+            "hybrid": [
+                "travel"
+            ],
+            "lexical": [
+                "travel"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "travel"
+                ],
+                "split": "heldout",
+                "text": "My plane reservation from Canada to Japan"
+            },
+            "retrieval_ms": 7.618
+        },
+        {
+            "hybrid": [
+                "meeting",
+                "vga",
+                "graphs"
+            ],
+            "lexical": [
+                "meeting",
+                "vga",
+                "graphs"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "meeting"
+                ],
+                "split": "dev",
+                "text": "Who was assigned to fix keyboard navigation at our project meeting?"
+            },
+            "retrieval_ms": 9.3746
+        },
+        {
+            "hybrid": [
+                "budget",
+                "battery"
+            ],
+            "lexical": [
+                "budget",
+                "battery"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "budget"
+                ],
+                "split": "heldout",
+                "text": "A breakdown of my household spending against planned amounts"
+            },
+            "retrieval_ms": 7.7039
+        },
+        {
+            "hybrid": [
+                "interview",
+                "resume"
+            ],
+            "lexical": [
+                "interview"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "interview"
+                ],
+                "split": "dev",
+                "text": "Preparing to answer coding questions during a hiring conversation"
+            },
+            "retrieval_ms": 6.4269
+        },
+        {
+            "hybrid": [
+                "scholarship",
+                "memory"
+            ],
+            "lexical": [
+                "scholarship",
+                "memory"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "scholarship"
+                ],
+                "split": "heldout",
+                "text": "The student funding application requiring references and grades"
+            },
+            "retrieval_ms": 7.6239
+        },
+        {
+            "hybrid": [
+                "filter",
+                "vga",
+                "camera"
+            ],
+            "lexical": [
+                "filter",
+                "camera"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "filter"
+                ],
+                "split": "dev",
+                "text": "Removing rapid noise from a sampled sensor signal"
+            },
+            "retrieval_ms": 7.0099
+        },
+        {
+            "hybrid": [
+                "amplifier",
+                "battery",
+                "diodes",
+                "memory",
+                "testing",
+                "threads",
+                "probability",
+                "security"
+            ],
+            "lexical": [
+                "amplifier",
+                "diodes",
+                "battery",
+                "memory",
+                "testing",
+                "threads",
+                "probability",
+                "security"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "amplifier"
+                ],
+                "split": "heldout",
+                "text": "Lab circuit that magnifies a voltage using negative feedback"
+            },
+            "retrieval_ms": 9.9981
+        },
+        {
+            "hybrid": [
+                "security",
+                "dynamic",
+                "memory",
+                "interview",
+                "sorting",
+                "algorithms",
+                "camera",
+                "backup",
+                "database",
+                "testing"
+            ],
+            "lexical": [
+                "security",
+                "camera",
+                "backup",
+                "database",
+                "testing",
+                "dynamic"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "security"
+                ],
+                "split": "dev",
+                "text": "Protecting account secrets with slow salted one way hashing"
+            },
+            "retrieval_ms": 7.692
+        },
+        {
+            "hybrid": [
+                "backup",
+                "dynamic",
+                "security",
+                "network",
+                "threads",
+                "database",
+                "testing"
+            ],
+            "lexical": [
+                "backup",
+                "network",
+                "threads",
+                "database",
+                "testing",
+                "dynamic"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "backup"
+                ],
+                "split": "heldout",
+                "text": "Recovering lost data from multiple copies including one kept elsewhere"
+            },
+            "retrieval_ms": 7.4295
+        },
+        {
+            "hybrid": [
+                "camera",
+                "filter",
+                "exercise",
+                "memory",
+                "testing",
+                "threads",
+                "calculus"
+            ],
+            "lexical": [
+                "filter",
+                "exercise",
+                "camera",
+                "memory",
+                "testing",
+                "threads",
+                "calculus"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "camera"
+                ],
+                "split": "dev",
+                "text": "Why moving subjects look blurry when I take pictures in low light"
+            },
+            "retrieval_ms": 7.1174
+        },
+        {
+            "hybrid": [
+                "exercise",
+                "security"
+            ],
+            "lexical": [
+                "exercise",
+                "security"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "paraphrase",
+                "relevant": [
+                    "exercise"
+                ],
+                "split": "heldout",
+                "text": "My plan for jogging workouts with recovery days between hard efforts"
+            },
+            "retrieval_ms": 8.8835
+        },
+        {
+            "hybrid": [
+                "algorithms"
+            ],
+            "lexical": [
+                "algorithms"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "filename",
+                "relevant": [
+                    "algorithms"
+                ],
+                "split": "dev",
+                "text": "lecture19.md"
+            },
+            "retrieval_ms": 7.9476
+        },
+        {
+            "hybrid": [
+                "resume"
+            ],
+            "lexical": [
+                "resume"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "filename",
+                "relevant": [
+                    "resume"
+                ],
+                "split": "heldout",
+                "text": "google_resume.md"
+            },
+            "retrieval_ms": 8.4097
+        },
+        {
+            "hybrid": [
+                "invoice"
+            ],
+            "lexical": [
+                "invoice"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "filename",
+                "relevant": [
+                    "invoice"
+                ],
+                "split": "dev",
+                "text": "invoice_103.txt"
+            },
+            "retrieval_ms": 7.4396
+        },
+        {
+            "hybrid": [
+                "dynamic",
+                "interview",
+                "graphs"
+            ],
+            "lexical": [
+                "dynamic"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "filename",
+                "relevant": [
+                    "dynamic"
+                ],
+                "split": "heldout",
+                "text": "knapsack_homework.txt"
+            },
+            "retrieval_ms": 8.2264
+        },
+        {
+            "hybrid": [
+                "threads",
+                "database",
+                "memory",
+                "network"
+            ],
+            "lexical": [
+                "threads"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "filename",
+                "relevant": [
+                    "threads"
+                ],
+                "split": "dev",
+                "text": "cpp_concurrency.md"
+            },
+            "retrieval_ms": 5.834
+        },
+        {
+            "hybrid": [
+                "linear",
+                "algorithms"
+            ],
+            "lexical": [
+                "linear"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "filename",
+                "relevant": [
+                    "linear"
+                ],
+                "split": "heldout",
+                "text": "matrix_lecture.md"
+            },
+            "retrieval_ms": 5.8318
+        },
+        {
+            "hybrid": [
+                "travel"
+            ],
+            "lexical": [
+                "travel"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "filename",
+                "relevant": [
+                    "travel"
+                ],
+                "split": "dev",
+                "text": "flight_booking.md"
+            },
+            "retrieval_ms": 7.868
+        },
+        {
+            "hybrid": [
+                "filter"
+            ],
+            "lexical": [
+                "filter"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "filename",
+                "relevant": [
+                    "filter"
+                ],
+                "split": "heldout",
+                "text": "signal_filter.md"
+            },
+            "retrieval_ms": 8.3342
+        },
+        {
+            "hybrid": [
+                "battery",
+                "invoice"
+            ],
+            "lexical": [
+                "invoice",
+                "battery"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "ambiguous",
+                "relevant": [
+                    "invoice",
+                    "battery"
+                ],
+                "split": "dev",
+                "text": "battery documents"
+            },
+            "retrieval_ms": 6.6146
+        },
+        {
+            "hybrid": [
+                "graphs",
+                "interview",
+                "dynamic",
+                "algorithms"
+            ],
+            "lexical": [
+                "graphs"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "ambiguous",
+                "relevant": [
+                    "algorithms",
+                    "sorting",
+                    "graphs",
+                    "dynamic"
+                ],
+                "split": "heldout",
+                "text": "algorithm course material"
+            },
+            "retrieval_ms": 5.6816
+        },
+        {
+            "hybrid": [
+                "scholarship",
+                "interview",
+                "resume"
+            ],
+            "lexical": [
+                "scholarship",
+                "interview"
+            ],
+            "notice": "",
+            "query": {
+                "kind": "ambiguous",
+                "relevant": [
+                    "resume",
+                    "interview"
+                ],
+                "split": "dev",
+                "text": "job application preparation"
+            },
+            "retrieval_ms": 5.8006
+        },
+        {
+            "hybrid": [
+                "diodes",
+                "filter"
+            ],
+            "lexical": [
+            ],
+            "notice": "",
+            "query": {
+                "kind": "ambiguous",
+                "relevant": [
+                    "diodes",
+                    "amplifier"
+                ],
+                "split": "heldout",
+                "text": "electronic circuits"
+            },
+            "retrieval_ms": 4.8635
+        },
+        {
+            "hybrid": [
+            ],
+            "lexical": [
+            ],
+            "notice": "No strong semantic matches; any results below match filenames or keywords.",
+            "query": {
+                "kind": "negative",
+                "relevant": [
+                ],
+                "split": "dev",
+                "text": "chocolate souffle baking recipe"
+            },
+            "retrieval_ms": 4.8624
+        },
+        {
+            "hybrid": [
+            ],
+            "lexical": [
+            ],
+            "notice": "No strong semantic matches; any results below match filenames or keywords.",
+            "query": {
+                "kind": "negative",
+                "relevant": [
+                ],
+                "split": "heldout",
+                "text": "medieval royal family genealogy"
+            },
+            "retrieval_ms": 5.0984
+        },
+        {
+            "hybrid": [
+            ],
+            "lexical": [
+            ],
+            "notice": "No strong semantic matches; any results below match filenames or keywords.",
+            "query": {
+                "kind": "negative",
+                "relevant": [
+                ],
+                "split": "dev",
+                "text": "marine coral reef biodiversity survey"
+            },
+            "retrieval_ms": 4.6041
+        },
+        {
+            "hybrid": [
+            ],
+            "lexical": [
+            ],
+            "notice": "No strong semantic matches; any results below match filenames or keywords.",
+            "query": {
+                "kind": "negative",
+                "relevant": [
+                ],
+                "split": "heldout",
+                "text": "volcanic magma mineral composition"
+            },
+            "retrieval_ms": 4.705
+        }
+    ],
+    "retrieval_only_latency": {
+        "median_ms": 7.618,
+        "p95_ms": 10.1474,
+        "samples": 46
+    },
+    "split": "all"
+}

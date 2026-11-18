@@ -1,0 +1,33 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {"major": 3, "minor": 25, "patch": 0},
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_TARGET_TRIPLET": "x64-windows",
+        "BUILD_TESTING": "ON"
+      }
+    },
+    {"name": "windows-debug", "inherits": "base", "cacheVariables": {"CMAKE_BUILD_TYPE": "Debug"}},
+    {"name": "windows-release", "inherits": "base", "cacheVariables": {"CMAKE_BUILD_TYPE": "Release"}},
+    {"name": "core-debug", "inherits": "windows-debug", "cacheVariables": {"FILESEARCHER_BUILD_UI": "OFF"}},
+    {"name": "windows-clean", "inherits": "windows-release"}
+  ],
+  "buildPresets": [
+    {"name": "windows-debug", "configurePreset": "windows-debug"},
+    {"name": "windows-release", "configurePreset": "windows-release"},
+    {"name": "core-debug", "configurePreset": "core-debug"},
+    {"name": "windows-clean", "configurePreset": "windows-clean"}
+  ],
+  "testPresets": [
+    {"name": "windows-debug", "configurePreset": "windows-debug", "output": {"outputOnFailure": true}},
+    {"name": "windows-release", "configurePreset": "windows-release", "output": {"outputOnFailure": true}},
+    {"name": "core-debug", "configurePreset": "core-debug", "output": {"outputOnFailure": true}},
+    {"name": "windows-clean", "configurePreset": "windows-clean", "output": {"outputOnFailure": true}}
+  ]
+}

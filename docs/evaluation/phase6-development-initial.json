@@ -1,0 +1,552 @@
+{
+  "documents": 30,
+  "hybrid": {
+    "exact_top1": 1,
+    "mrr": 0.9523809523809523,
+    "negative_empty_rate": 1,
+    "paraphrase_mrr": 0.9666666666666667,
+    "positives": 21,
+    "recall_at_10": 1
+  },
+  "lexical": {
+    "exact_top1": 1,
+    "mrr": 0.9087301587301588,
+    "negative_empty_rate": 1,
+    "paraphrase_mrr": 0.9055555555555556,
+    "positives": 21,
+    "recall_at_10": 0.9761904761904762
+  },
+  "lexical_latency": {
+    "median_ms": 1.4039,
+    "p95_ms": 1.9864,
+    "samples": 23
+  },
+  "passed": false,
+  "persistent_worker_harness_latency": {
+    "median_ms": 8.6853,
+    "p95_ms": 10.584900000000001,
+    "samples": 23
+  },
+  "production_cold_query_latency": {
+    "median_ms": 1296.7134,
+    "p95_ms": 1307.7597,
+    "samples": 4
+  },
+  "queries": 23,
+  "results": [
+    {
+      "hybrid": [
+        "algorithms",
+        "sorting",
+        "exercise",
+        "battery",
+        "dynamic",
+        "interview",
+        "graphs"
+      ],
+      "lexical": [
+        "algorithms",
+        "exercise",
+        "battery"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "algorithms"
+        ],
+        "split": "dev",
+        "text": "How do I work out the running time of recursive divide and conquer code?"
+      },
+      "retrieval_ms": 2.2309
+    },
+    {
+      "hybrid": [
+        "vga",
+        "meeting",
+        "resume",
+        "testing"
+      ],
+      "lexical": [
+        "vga",
+        "resume",
+        "testing",
+        "meeting"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "vga"
+        ],
+        "split": "dev",
+        "text": "My programmable logic project that drives a computer monitor"
+      },
+      "retrieval_ms": 2.5796
+    },
+    {
+      "hybrid": [
+        "invoice",
+        "resume",
+        "battery"
+      ],
+      "lexical": [
+        "invoice",
+        "resume",
+        "battery"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "invoice"
+        ],
+        "split": "dev",
+        "text": "Proof that I paid for a new notebook computer battery"
+      },
+      "retrieval_ms": 2.2261
+    },
+    {
+      "hybrid": [
+        "sorting",
+        "graphs",
+        "threads",
+        "algorithms",
+        "dynamic"
+      ],
+      "lexical": [
+        "sorting",
+        "graphs",
+        "threads"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "sorting"
+        ],
+        "split": "dev",
+        "text": "Which ordering algorithm divides elements around a pivot?"
+      },
+      "retrieval_ms": 2.1868
+    },
+    {
+      "hybrid": [
+        "dynamic"
+      ],
+      "lexical": [
+        "dynamic"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "dynamic"
+        ],
+        "split": "dev",
+        "text": "Homework choosing valuable objects that fit in a bag with a weight limit"
+      },
+      "retrieval_ms": 2.0603
+    },
+    {
+      "hybrid": [
+        "database",
+        "git",
+        "probability",
+        "filter",
+        "backup",
+        "dynamic",
+        "camera"
+      ],
+      "lexical": [
+        "database",
+        "probability",
+        "filter",
+        "git",
+        "camera"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "database"
+        ],
+        "split": "dev",
+        "text": "Notes on all or nothing updates and durable database commits"
+      },
+      "retrieval_ms": 1.9896
+    },
+    {
+      "hybrid": [
+        "memory",
+        "threads",
+        "resume",
+        "dynamic",
+        "testing",
+        "linear",
+        "calculus"
+      ],
+      "lexical": [
+        "memory",
+        "threads",
+        "resume",
+        "testing",
+        "calculus"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "memory"
+        ],
+        "split": "dev",
+        "text": "C++ objects that free allocated resources when leaving scope"
+      },
+      "retrieval_ms": 2.0444
+    },
+    {
+      "hybrid": [
+        "testing",
+        "linear",
+        "security",
+        "resume",
+        "exercise",
+        "meeting"
+      ],
+      "lexical": [
+        "linear",
+        "security",
+        "resume",
+        "testing",
+        "exercise",
+        "meeting"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "testing"
+        ],
+        "split": "dev",
+        "text": "Checking that an old software bug never returns after a change"
+      },
+      "retrieval_ms": 2.4899
+    },
+    {
+      "hybrid": [
+        "probability",
+        "scholarship",
+        "exercise",
+        "meeting"
+      ],
+      "lexical": [
+        "probability",
+        "scholarship",
+        "exercise",
+        "meeting"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "probability"
+        ],
+        "split": "dev",
+        "text": "Updating a belief after observing new evidence"
+      },
+      "retrieval_ms": 2.0127
+    },
+    {
+      "hybrid": [
+        "lease"
+      ],
+      "lexical": [
+        "lease"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "lease"
+        ],
+        "split": "dev",
+        "text": "My rental contract describing the damage deposit and move out notice"
+      },
+      "retrieval_ms": 2.1071
+    },
+    {
+      "hybrid": [
+        "meeting",
+        "vga",
+        "graphs"
+      ],
+      "lexical": [
+        "meeting",
+        "vga",
+        "graphs"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "meeting"
+        ],
+        "split": "dev",
+        "text": "Who was assigned to fix keyboard navigation at our project meeting?"
+      },
+      "retrieval_ms": 2.6912
+    },
+    {
+      "hybrid": [
+        "interview",
+        "resume"
+      ],
+      "lexical": [
+        "interview"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "interview"
+        ],
+        "split": "dev",
+        "text": "Preparing to answer coding questions during a hiring conversation"
+      },
+      "retrieval_ms": 1.9675
+    },
+    {
+      "hybrid": [
+        "filter",
+        "vga",
+        "camera"
+      ],
+      "lexical": [
+        "filter",
+        "camera"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "filter"
+        ],
+        "split": "dev",
+        "text": "Removing rapid noise from a sampled sensor signal"
+      },
+      "retrieval_ms": 2.033
+    },
+    {
+      "hybrid": [
+        "security",
+        "dynamic",
+        "camera",
+        "memory",
+        "backup",
+        "database",
+        "interview",
+        "sorting",
+        "testing",
+        "algorithms"
+      ],
+      "lexical": [
+        "security",
+        "camera",
+        "backup",
+        "database",
+        "testing",
+        "dynamic"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "security"
+        ],
+        "split": "dev",
+        "text": "Protecting account secrets with slow salted one way hashing"
+      },
+      "retrieval_ms": 2.0081
+    },
+    {
+      "hybrid": [
+        "filter",
+        "camera",
+        "exercise",
+        "memory",
+        "testing",
+        "threads",
+        "calculus"
+      ],
+      "lexical": [
+        "filter",
+        "exercise",
+        "camera",
+        "memory",
+        "testing",
+        "threads",
+        "calculus"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "paraphrase",
+        "relevant": [
+          "camera"
+        ],
+        "split": "dev",
+        "text": "Why moving subjects look blurry when I take pictures in low light"
+      },
+      "retrieval_ms": 2.1409
+    },
+    {
+      "hybrid": [
+        "algorithms"
+      ],
+      "lexical": [
+        "algorithms"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "filename",
+        "relevant": [
+          "algorithms"
+        ],
+        "split": "dev",
+        "text": "lecture19.md"
+      },
+      "retrieval_ms": 2.1218
+    },
+    {
+      "hybrid": [
+        "invoice"
+      ],
+      "lexical": [
+        "invoice"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "filename",
+        "relevant": [
+          "invoice"
+        ],
+        "split": "dev",
+        "text": "invoice_103.txt"
+      },
+      "retrieval_ms": 1.9677
+    },
+    {
+      "hybrid": [
+        "threads",
+        "database",
+        "memory",
+        "network"
+      ],
+      "lexical": [
+        "threads"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "filename",
+        "relevant": [
+          "threads"
+        ],
+        "split": "dev",
+        "text": "cpp_concurrency.md"
+      },
+      "retrieval_ms": 2.031
+    },
+    {
+      "hybrid": [
+        "travel"
+      ],
+      "lexical": [
+        "travel"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "filename",
+        "relevant": [
+          "travel"
+        ],
+        "split": "dev",
+        "text": "flight_booking.md"
+      },
+      "retrieval_ms": 2.1485
+    },
+    {
+      "hybrid": [
+        "invoice",
+        "battery"
+      ],
+      "lexical": [
+        "invoice",
+        "battery"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "ambiguous",
+        "relevant": [
+          "invoice",
+          "battery"
+        ],
+        "split": "dev",
+        "text": "battery documents"
+      },
+      "retrieval_ms": 1.9625
+    },
+    {
+      "hybrid": [
+        "scholarship",
+        "interview",
+        "resume"
+      ],
+      "lexical": [
+        "scholarship",
+        "interview"
+      ],
+      "notice": "",
+      "query": {
+        "kind": "ambiguous",
+        "relevant": [
+          "resume",
+          "interview"
+        ],
+        "split": "dev",
+        "text": "job application preparation"
+      },
+      "retrieval_ms": 1.8307
+    },
+    {
+      "hybrid": [],
+      "lexical": [],
+      "notice": "No strong semantic matches; any results below match filenames or keywords.",
+      "query": {
+        "kind": "negative",
+        "relevant": [],
+        "split": "dev",
+        "text": "chocolate souffle baking recipe"
+      },
+      "retrieval_ms": 1.8407
+    },
+    {
+      "hybrid": [],
+      "lexical": [],
+      "notice": "No strong semantic matches; any results below match filenames or keywords.",
+      "query": {
+        "kind": "negative",
+        "relevant": [],
+        "split": "dev",
+        "text": "marine coral reef biodiversity survey"
+      },
+      "retrieval_ms": 1.7591
+    }
+  ],
+  "retrieval_only_latency": {
+    "median_ms": 2.0444,
+    "p95_ms": 2.5796,
+    "samples": 23
+  },
+  "split": "dev",
+  "recorded_date": "2026-11-18",
+  "note": "Historical development run before held-out evaluation; passed flag used the provisional absolute-gain check on the development subset."
+}

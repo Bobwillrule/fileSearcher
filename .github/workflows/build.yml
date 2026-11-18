@@ -1,0 +1,29 @@
+name: Windows build
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Get pinned vcpkg
+        shell: pwsh
+        run: |
+          git clone https://github.com/microsoft/vcpkg.git .tools/vcpkg
+          git -C .tools/vcpkg checkout 19e7a138440f005fea23d92b19df87f8040e66c1
+          ./.tools/vcpkg/bootstrap-vcpkg.bat -disableMetrics
+      - name: Install Qt
+        shell: pwsh
+        run: |
+          python -m pip install aqtinstall==3.3.0
+          python -m aqt install-qt windows desktop 6.8.3 win64_msvc2022_64 -O .tools/qt --archives qtbase qtdeclarative qtshadertools qtsvg qttools
+      - name: Build and test
+        shell: pwsh
+        run: |
+          $env:VCPKG_ROOT = Join-Path $PWD '.tools/vcpkg'
+          ./tools/setup-phase1.ps1
+          ./tools/build.ps1 -Preset windows-release -ModelTests

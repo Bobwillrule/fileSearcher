@@ -1,0 +1,46 @@
+{
+  "chunks": 100000,
+  "cold_hybrid_ms": 3964.1978,
+  "database_bytes": 270438400,
+  "exact_fallback_queries": 0,
+  "filename": {
+    "median_ms": 41.7363,
+    "p95_ms": 55.4612,
+    "samples": 24
+  },
+  "filename_target_met": true,
+  "files": 50000,
+  "filtered_hybrid": {
+    "median_ms": 363.9298,
+    "p95_ms": 519.8835,
+    "samples": 24
+  },
+  "graph_build_ms": 45347,
+  "graph_bytes": 164818273,
+  "hnsw_queries": 24,
+  "hybrid": {
+    "median_ms": 371.2961,
+    "p95_ms": 533.4656,
+    "samples": 24
+  },
+  "hybrid_target_met": false,
+  "large_document_passages": 5001,
+  "large_documents": 10,
+  "parent_peak_working_set_bytes": 390479872,
+  "parent_working_set_bytes": 221220864,
+  "prepare_ms": 6797,
+  "small_files": 49990,
+  "vectors": "Eight real BGE base embeddings plus deterministic normalized perturbations; retrieval/load benchmark, not embedding throughput or quality",
+  "worker_peak_working_set_bytes": 221061120,
+  "worker_starts": 1,
+  "worker_working_set_bytes": 180748288,
+  "reference_machine": {
+    "date": "2026-11-18",
+    "os": "Windows 11 25H2, build 26200.9974",
+    "cpu": "Intel Core Ultra 7 258V",
+    "logical_processors": 8,
+    "physical_ram_bytes": 33840226304,
+    "build": "MSVC 14.44 x64 Release, Qt 6.8.3, ONNX Runtime 1.23.2, CPU inference with two threads",
+    "storage": "Local workspace drive; drive model not measured"
+  }
+}

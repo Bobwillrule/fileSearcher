@@ -1,0 +1,10 @@
+{
+    "ai_enabled": false,
+    "index_ms": 110758,
+    "max_heartbeat_gap_ms": 162,
+    "passages": 1545,
+    "physical_large_documents": 4,
+    "physical_small_files": 1001,
+    "restart_and_clear_preserve_originals": true,
+    "ui_heartbeat_ticks": 9994
+}

@@ -1,0 +1,19 @@
+{
+  "description": "Synthetic retrieval smoke set; not a model quality benchmark",
+  "documents": [
+    {"id": "algorithms", "filename": "lecture19.txt", "text": "The Master Theorem solves divide-and-conquer recurrence relations. Dynamic programming reuses solutions to overlapping subproblems."},
+    {"id": "resume", "filename": "google_resume.txt", "text": "Resume for a Google software engineering internship. Projects include a C++ search engine and digital logic design."},
+    {"id": "electronics", "filename": "diode_notes.txt", "text": "A diode conducts current in the forward direction and blocks reverse current. A rectifier converts alternating current into direct current."},
+    {"id": "vga", "filename": "display_project.txt", "text": "The FPGA VGA display project generates horizontal and vertical synchronization signals for a monitor."},
+    {"id": "invoice", "filename": "invoice_103.txt", "text": "Invoice for a replacement laptop battery. Total paid: 89 dollars. Retain this receipt for warranty service."}
+  ],
+  "queries": [
+    {"text": "How do I solve divide and conquer recurrences?", "relevant": ["algorithms"], "kind": "semantic"},
+    {"text": "job application CV for Google", "relevant": ["resume"], "kind": "semantic"},
+    {"text": "component that lets electricity flow one way", "relevant": ["electronics"], "kind": "semantic"},
+    {"text": "monitor timing signals in my FPGA project", "relevant": ["vga"], "kind": "semantic"},
+    {"text": "proof of purchase for the battery", "relevant": ["invoice"], "kind": "semantic"},
+    {"text": "invoice_103.txt", "relevant": ["invoice"], "kind": "filename"},
+    {"text": "my chocolate cake recipe", "relevant": [], "kind": "negative"}
+  ]
+}
