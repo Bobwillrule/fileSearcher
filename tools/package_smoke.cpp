@@ -2,6 +2,7 @@
 #include <QCoreApplication>
 #include <QTemporaryDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QDir>
 #include <QElapsedTimer>
 #include <QThread>
@@ -61,6 +62,20 @@ int main(int argc,char** argv) {
                     require(!controller.results().isEmpty() && controller.results().first().toMap()["name"]=="diodes.txt","Semantic search did not find the diode document");
                     require(controller.results().first().toMap()["matchLabel"].toString().contains("Similar meaning"),"Semantic evidence missing");
                 }
+                const auto fileId=controller.results().first().toMap()["fileId"].toLongLong();
+                auto* organizer=qobject_cast<OrganizationController*>(controller.organizer()); require(organizer,"Organization controller missing");
+                waitFor([&]{return !organizer->busy();});
+                const auto destination=temp.path()+"/organized"; require(QDir().mkpath(destination),"Cannot create move destination");
+                organizer->saveCategory(0,"Electronics","semiconductor diode rectifier",destination); waitFor([&]{return !organizer->busy();});
+                organizer->inspect(fileId); waitFor([&]{return !organizer->busy();}); require(!organizer->suggestions().isEmpty(),"Category evidence unavailable");
+                organizer->decide(organizer->categories().first().toMap()["id"].toLongLong(),true); waitFor([&]{return !organizer->busy();}); require(QFileInfo::exists(root+"/diodes.txt"),"Tag acceptance moved a file");
+                organizer->prepareMove(destination); waitFor([&]{return !organizer->busy();}); require(!organizer->movePlan().isEmpty(),"Move review unavailable");
+                const auto moveId=organizer->movePlan()["id"].toString(); organizer->approveMove(moveId); waitFor([&]{return !organizer->busy() && done(controller);});
+                require(QFileInfo::exists(destination+"/diodes.txt") && !QFileInfo::exists(root+"/diodes.txt"),"Approved move failed");
+                organizer->prepareUndo(moveId); waitFor([&]{return !organizer->busy();}); require(!organizer->movePlan().isEmpty(),"Undo review unavailable");
+                organizer->approveMove(organizer->movePlan()["id"].toString()); waitFor([&]{return !organizer->busy() && done(controller);});
+                require(QFileInfo::exists(root+"/diodes.txt") && !QFileInfo::exists(destination+"/diodes.txt"),"Approved undo failed");
+                report["category_tag_move_undo"]=true;
             }
             controller.refreshStorage(); waitFor([&]{return controller.storageInfo().contains("files");});
             report["passages"]=QJsonValue::fromVariant(controller.storageInfo()["passages"]);

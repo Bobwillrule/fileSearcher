@@ -77,6 +77,16 @@ ApplicationWindow {
     }
     Shortcut { sequence: "Ctrl+F"; onActivated: { searchInput.forceActiveFocus(); searchInput.selectAll() } }
     Shortcut { sequence: "F5"; onActivated: fileApp.scan() }
+    OrganizationPanel {
+        id: organizationPanel
+        objectName: "organizationPanel"
+        organizer: fileApp.organizer
+        selectedFileId: window.selectedFileId
+        anchors.centerIn: parent
+        width: Math.min(980, window.width - 32)
+        height: Math.min(700, window.height - 32)
+        onOpenFileRequested: function(id) { fileApp.openFile(id, false) }
+    }
     FolderDialog {
         id: folderPicker
         title: "Choose a folder to index"
@@ -128,6 +138,7 @@ ApplicationWindow {
             Label { text: "Search index: " + window.readableBytes(fileApp.storageInfo.indexBytes) + " · " + (fileApp.storageInfo.files || 0) + " files · " + (fileApp.storageInfo.vectors || 0) + " AI passages"; wrapMode: Text.WordWrap; Layout.fillWidth: true }
             Label { text: fileApp.storageInfo.indexPath || "Loading storage details…"; textFormat: Text.PlainText; wrapMode: Text.WrapAnywhere; Layout.fillWidth: true; color: "#9fb2c5" }
             Label { text: "AI model: " + window.readableBytes(fileApp.storageInfo.modelBytes); Layout.fillWidth: true }
+            Label { text: "Collections and move history: " + window.readableBytes(fileApp.storageInfo.organizationBytes) + " (kept when clearing the search index)"; wrapMode: Text.WordWrap; Layout.fillWidth: true }
             Label { text: fileApp.storageInfo.modelPath || ""; textFormat: Text.PlainText; wrapMode: Text.WrapAnywhere; Layout.fillWidth: true; color: "#9fb2c5" }
             RowLayout {
                 Button { text: "Open index folder"; onClicked: fileApp.openStorageFolder(false) }
@@ -235,6 +246,7 @@ ApplicationWindow {
                 Label { text: "Find your files."; font.pixelSize: 32; font.bold: true; Layout.fillWidth: true }
                 Button { text: "Local AI settings"; onClicked: aiDialog.open() }
                 Button { objectName: "storageButton"; text: "Storage && help"; onClicked: storageDialog.open() }
+                Button { objectName: "organizationButton"; text: "Related && organize"; enabled: fileApp.organizer !== null; onClicked: { organizationPanel.open(); if(window.selectedFileId > 0) fileApp.organizer.inspect(window.selectedFileId) } }
             }
             Label { text: fileApp.searchNotice || fileApp.aiStatus; textFormat: Text.PlainText; color: "#9fb2c5"; font.pixelSize: 12; wrapMode: Text.WordWrap; Layout.fillWidth: true }
             RowLayout {

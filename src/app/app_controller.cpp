@@ -66,11 +66,15 @@ AppController::AppController(const QString& dataDirectory, QObject* parent, Inde
         queue_->retain(ids);
         for (const auto& root : indexedRoots_) queueRoot(root.id,0);
         if (!roots_.isEmpty()) status_ = paused_ ? "Indexing paused. Resume to update saved results." : "Saved index loaded. Checking for changes…";
+        organizer_=new OrganizationController(dataDirectory_,this);
+        organizer_->setAiEnabled(aiEnabled_);
+        connect(organizer_,&OrganizationController::filesChanged,this,[this] { loadPreview(0); scan(); });
         startSearch();
         scheduler_.start(timing_.tickMs); periodic_.start(timing_.reconcileMs); pollWork();
     } catch (const std::exception& error) { error_ = QString::fromUtf8(error.what()); queue_.reset(); store_.reset(); }
 }
 AppController::~AppController() {
+    delete organizer_; organizer_=nullptr;
     scheduler_.stop(); periodic_.stop();
     disconnect(&directoryWatcher_,nullptr,this,nullptr);
     directoryWatcher_.synchronize({},{});
@@ -194,6 +198,7 @@ void AppController::configureAi(bool enabled,int profile) {
     settings.setValue("ai/enabled",enabled); settings.setValue("ai/profile",profile); settings.sync();
     if (settings.status()!=QSettings::NoError) { error_="Cannot save AI preferences."; emit stateChanged(); return; }
     aiEnabled_=enabled; aiProfile_=profile; aiCancelled_->store(true);
+    if(organizer_) organizer_->setAiEnabled(enabled);
     if (options_.mode==5) startSearch();
     aiStatus_=enabled ? "AI settings saved. Pending chunks will resume." : "AI indexing is off. Keyword search remains available.";
     if (enabled) for (const auto& root:indexedRoots_) queueRoot(root.id,0);
@@ -243,6 +248,9 @@ void AppController::refreshStorage() {
         for (const auto& file:vectors.entryInfoList({"graph-*.hnsw","graph-*.hnsw.part","current.json"},QDir::Files|QDir::NoSymLinks)) indexBytes+=file.size();
         for (const auto& name:{"onnx/model.onnx","vocab.txt","README.md","LICENSE","model-assets.lock.json"}) modelBytes+=QFileInfo(model+'/'+name).size();
         result["indexBytes"]=indexBytes; result["modelBytes"]=modelBytes;
+        qint64 organizationBytes=0;
+        for(const auto& name:{"organization.sqlite","organization.sqlite-wal","organization.sqlite-shm"}) organizationBytes+=QFileInfo(data+'/'+name).size();
+        result["organizationBytes"]=organizationBytes;
         return result;
     }));
 }
@@ -260,6 +268,7 @@ void AppController::openStorageFolder(bool model) {
     }
 }
 void AppController::clearSavedIndex(bool embeddingsOnly) {
+    if(organizer_ && organizer_->busy()) { error_="Wait for the organization operation to finish before clearing the index."; emit stateChanged(); return; }
     if (busy_ || !store_ || !queue_) return;
     searchCancelled_->store(true); ++searchGeneration_; searching_=false;
     ++previewGeneration_; preview_.clear(); previewLoading_=false; emit previewChanged();

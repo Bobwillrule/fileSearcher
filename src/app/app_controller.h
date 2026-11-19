@@ -12,6 +12,7 @@
 #include <QThread>
 #include "search/hybrid_search.h"
 #include <memory>
+#include "organization/organization_controller.h"
 
 struct IndexingTiming { int debounceMs = 500; int tickMs = 100; int reconcileMs = 300000; bool contentEnabled = true; bool embeddingsEnabled = true; };
 class AppController : public QObject {
@@ -33,6 +34,7 @@ class AppController : public QObject {
     Q_PROPERTY(QString aiStatus READ aiStatus NOTIFY stateChanged)
     Q_PROPERTY(QString searchNotice READ searchNotice NOTIFY stateChanged)
     Q_PROPERTY(QVariantMap storageInfo READ storageInfo NOTIFY storageChanged)
+    Q_PROPERTY(QObject* organizer READ organizer CONSTANT)
 public:
     explicit AppController(const QString& dataDirectory, QObject* parent = nullptr, IndexingTiming timing = {});
     ~AppController() override;
@@ -53,6 +55,7 @@ public:
     QString aiStatus() const { return aiStatus_; }
     QString searchNotice() const { return searchNotice_; }
     QVariantMap storageInfo() const { return storageInfo_; }
+    QObject* organizer() const { return organizer_; }
     Q_INVOKABLE void refreshStorage();
     Q_INVOKABLE void clearSavedIndex(bool embeddingsOnly=false);
     Q_INVOKABLE void releaseAiMemory();
@@ -75,6 +78,7 @@ signals:
     void previewChanged();
     void storageChanged();
 private:
+    OrganizationController* organizer_=nullptr;
     void refreshRoots();
     void startSearch();
     void queueRoot(qint64 root, int delayMs);

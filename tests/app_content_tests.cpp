@@ -104,3 +104,43 @@ TEST_CASE("Clearing saved search data preserves original files and supports re-a
     QFile original(root+"/keep.txt"); REQUIRE(original.open(QIODevice::ReadOnly)); CHECK(original.readAll()=="Original contents must survive index maintenance."); original.close();
     controller.setPaused(false); controller.addFolder(QUrl::fromLocalFile(root),""); waitFor([&] { return finished(controller); }); CHECK(controller.total()==1);
 }
+
+TEST_CASE("Approved moves reconcile watched folders and undo while monitoring stays active") {
+    QTemporaryDir fixture; const auto root=fixture.path()+"/docs",target=fixture.path()+"/organized";
+    REQUIRE(QDir().mkpath(root)); REQUIRE(QDir().mkpath(target)); save(root+"/keep.txt","Original monitored file.");
+    AppController controller(fixture.path()+"/index",nullptr,{30,10,60000,true,false});
+    controller.addFolder(QUrl::fromLocalFile(root),""); waitFor([&]{return finished(controller);});
+    controller.addFolder(QUrl::fromLocalFile(target),""); waitFor([&]{return finished(controller);});
+    auto* organizer=qobject_cast<OrganizationController*>(controller.organizer()); REQUIRE(organizer);
+    waitFor([&]{return !organizer->busy();}); REQUIRE(controller.total()==1);
+    organizer->inspect(controller.results().front().toMap()["fileId"].toLongLong()); waitFor([&]{return !organizer->busy();});
+    organizer->prepareMove(target); waitFor([&]{return !organizer->busy();}); INFO(organizer->message().toStdString()); REQUIRE(!organizer->movePlan().isEmpty());
+    const auto moveId=organizer->movePlan()["id"].toString(); organizer->approveMove(moveId); waitFor([&]{return !organizer->busy() && finished(controller);});
+    INFO(organizer->message().toStdString()); REQUIRE(QFileInfo::exists(target+"/keep.txt"));
+    waitFor([&]{return controller.total()==1 && controller.results().front().toMap()["path"].toString()==target+"/keep.txt";});
+    organizer->prepareUndo(moveId); waitFor([&]{return !organizer->busy();}); REQUIRE(!organizer->movePlan().isEmpty());
+    organizer->approveMove(organizer->movePlan()["id"].toString()); waitFor([&]{return !organizer->busy() && finished(controller);});
+    REQUIRE(QFileInfo::exists(root+"/keep.txt"));
+    waitFor([&]{return controller.total()==1 && controller.results().front().toMap()["path"].toString()==root+"/keep.txt";});
+}
+
+TEST_CASE("Real BGE passages drive related files and example-based category suggestions", "[.model]") {
+    QTemporaryDir fixture; const auto root=fixture.path()+"/docs"; REQUIRE(QDir().mkpath(root));
+    save(root+"/diode-principles.txt","A semiconductor diode conducts current in the forward direction and blocks reverse current. A rectifier converts alternating current into direct current.");
+    save(root+"/rectifier-reference.txt","Diodes pass current in one direction and block it in the other. Rectifier circuits convert AC power into DC power.");
+    save(root+"/banana.txt","Bananas and apples are fruits used to make sweet desserts and fruit salads.");
+    AppController controller(fixture.path()+"/index",nullptr,{30,10,60000,true,true}); controller.addFolder(QUrl::fromLocalFile(root),"");
+    waitFor([&]{return finished(controller);}); REQUIRE(controller.aiStatus().contains("Local AI ready"));
+    qint64 selected=0,example=0;
+    for(const auto& value:controller.results()) { const auto row=value.toMap(); if(row["name"]=="diode-principles.txt") selected=row["fileId"].toLongLong(); if(row["name"]=="rectifier-reference.txt") example=row["fileId"].toLongLong(); }
+    REQUIRE(selected); REQUIRE(example);
+    auto* organizer=qobject_cast<OrganizationController*>(controller.organizer()); REQUIRE(organizer); waitFor([&]{return !organizer->busy();});
+    organizer->saveCategory(0,"Components","Laboratory examples",QStringLiteral("")); waitFor([&]{return !organizer->busy();}); REQUIRE(organizer->categories().size()==1);
+    organizer->inspect(example); waitFor([&]{return !organizer->busy();});
+    organizer->addExample(organizer->categories().front().toMap()["id"].toLongLong()); waitFor([&]{return !organizer->busy();});
+    organizer->inspect(selected); waitFor([&]{return !organizer->busy();}); INFO(organizer->message().toStdString());
+    REQUIRE(!organizer->related().isEmpty()); CHECK(organizer->related().front().toMap()["fileId"].toLongLong()==example);
+    REQUIRE(organizer->suggestions().size()==1); CHECK(organizer->suggestions().front().toMap()["reason"].toString().contains("example"));
+    controller.configureAi(false,1); organizer->inspect(selected); waitFor([&]{return !organizer->busy();});
+    CHECK(organizer->suggestions().isEmpty()); CHECK(organizer->related().isEmpty());
+}

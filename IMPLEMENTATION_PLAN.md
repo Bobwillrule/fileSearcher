@@ -359,7 +359,7 @@ Revisit these only after the search MVP is measured and stable:
 - [x] Phase 5: Local embeddings and vector storage (local validation)
 - [x] Phase 6: Hybrid search and evaluation (local validation)
 - [ ] Phase 7: Search MVP usability and performance (local implementation validated; independent-machine/public-release gates pending)
-- [ ] Phase 8: Related files and organization
+- [x] Phase 8: Related files and organization (local validation; independent deployment and physical cross-volume checks remain open)
 - [ ] Phase 9: Duplicate and cleanup review
 - [ ] Phase 10: Release readiness
 
@@ -384,9 +384,14 @@ management, persistent query inference/graph reuse, large-library measurements a
 portable validation tooling. Filename p95 meets the provisional target; hybrid p95
 remains slightly above it on the recorded workload. See [Phase 7 notes](docs/PHASE_7_USABILITY_PERFORMANCE.md).
 Independent-machine deployment and the distribution notice/source/license checklist
-remain open for the first public search release gate. Phase 8 has not started.
-User checkpoint (2026-11-18): finish Phase 7 only; do not start Phase 8 without
-a new instruction. Keep the Phase 7 release gate open until its outstanding checks pass.
+remain open for the first public search release gate.
+The user's later instruction on 2026-11-18 explicitly authorized Phase 8. Its local
+implementation adds related evidence, editable categories/examples, virtual tags,
+reviewed moves, durable recovery and checked undo. Release tests pass 21/21, final
+affected Debug checks pass 5/5, and the packaged tag/move/undo workflow passes.
+See [Phase 8 validation and limitations](docs/PHASE_8_ORGANIZATION.md).
+Keep the Phase 7 release gate open
+until its independent checks pass. Phase 9 has not started.
 
 ## 10. Primary references
 

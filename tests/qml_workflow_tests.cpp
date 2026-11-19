@@ -58,6 +58,28 @@ int main(int argc,char** argv) {
         QMetaObject::invokeMethod(storage,"open"); QTest::qWait(250); require(storage->property("visible").toBool(),"Storage dialog did not open");
         require(window->grabWindow().save(screenshots+"/phase7-storage.png"),"Cannot save storage screenshot");
         require(storage->property("height").toDouble()<=window->height(),"Storage dialog exceeds minimum window height");
+        QMetaObject::invokeMethod(storage,"close"); QTest::qWait(200);
+        auto* organizer=qobject_cast<OrganizationController*>(controller.organizer()); require(organizer,"Missing organization controller");
+        waitFor([&]{return !organizer->busy();});
+        organizer->inspect(controller.results().first().toMap()["fileId"].toLongLong()); waitFor([&]{return !organizer->busy();});
+        require(!organizer->selected().isEmpty(),"Cannot inspect indexed file");
+        auto* panel=window->findChild<QObject*>("organizationPanel"); require(panel,"Missing organization panel");
+        QMetaObject::invokeMethod(panel,"open"); QTest::qWait(250);
+        require(panel->property("visible").toBool(),"Organization panel failed to open");
+        require(window->grabWindow().save(screenshots+"/phase8-related.png"),"Cannot save organization screenshot");
+        QMetaObject::invokeMethod(panel,"editCategory",Q_ARG(QVariant,QVariant())); QTest::qWait(200);
+        auto* editor=panel->findChild<QObject*>("categoryEditor"); auto* categoryName=panel->findChild<QObject*>("categoryName");
+        require(editor && categoryName && editor->property("visible").toBool(),"Category editor did not open");
+        categoryName->setProperty("text","Study collection"); QMetaObject::invokeMethod(editor,"accept");
+        waitFor([&]{return !organizer->busy();}); require(organizer->categories().size()==1,"Category editor did not save a virtual category");
+        auto* tabs=panel->findChild<QObject*>("organizationTabs"); require(tabs,"Missing organization tabs"); tabs->setProperty("currentIndex",1);
+        QTest::qWait(200); require(window->grabWindow().save(screenshots+"/phase8-categories.png"),"Cannot save category screenshot");
+        const auto destination=temp.path()+"/organized"; require(QDir().mkpath(destination),"Cannot make move destination fixture");
+        organizer->prepareMove(destination); waitFor([&]{return !organizer->busy();});
+        auto* confirmation=panel->findChild<QObject*>("moveConfirmation"); require(confirmation && confirmation->property("visible").toBool(),"Move review did not open");
+        QTest::qWait(200); require(window->grabWindow().save(screenshots+"/phase8-move-review.png"),"Cannot save move review screenshot");
+        QMetaObject::invokeMethod(confirmation,"reject"); waitFor([&]{return !organizer->busy();});
+        require(QDir(root).entryList(QDir::Files).size()==8 && QDir(destination).entryList(QDir::Files).isEmpty(),"Rejecting a move changed files");
         QTextStream(stdout)<<"Keyboard, selection, clear, focus, storage and minimum-size UI checks passed.\n"; return 0;
     } catch(const std::exception& e) { QTextStream(stderr)<<e.what()<<Qt::endl; return 1; }
 }

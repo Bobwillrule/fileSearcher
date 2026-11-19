@@ -1,13 +1,13 @@
 # fileSearcher
 
-A Windows desktop application for local file search, with planned semantic discovery
-and user-approved organization.
+A Windows desktop application for local semantic file search, related-file discovery,
+virtual collections and user-approved organization.
 
 See [the implementation gameplan](IMPLEMENTATION_PLAN.md) for the technology
 stack, architecture, phased roadmap, acceptance criteria, and release checks.
 
-Current status: Phase 7 usability, persistent AI queries, storage controls and portable
-validation packaging implemented locally. Independent-machine deployment and public
+Current status: Phase 8 related files, category suggestions, virtual collections,
+reviewed moves and checked undo implemented locally. Independent-machine deployment and public
 distribution checks remain open; this is not yet a public-release sign-off.
 Select local folders, edit exclusions, scan in the background, filter results,
 and open files or show them in Explorer. The index survives restart.
@@ -26,6 +26,17 @@ rescans. Selection survives result refreshes when the same file remains present.
 AI-data rebuild and index clearing with confirmation. Original files are preserved.
 The query model stays loaded between searches; turning AI off or releasing memory
 closes it. See [Phase 7 results](docs/PHASE_7_USABILITY_PERFORMANCE.md).
+
+Select a result and choose **Related & organize**. Related files show indexed evidence
+and filename/folder context. Create categories with descriptions, optional existing
+destination folders and example files. **Accept tag** adds a virtual collection entry;
+**Review move** is a separate approval. Weak or ambiguous matches produce no category
+suggestion. Turning AI off also disables semantic organization matching.
+
+Move history records plans before filesystem changes, checks source identity/content,
+refuses overwrites, and offers reviewed undo. Startup recovery inspects interrupted
+operations without automatically deleting files. Repository, build, application and
+index folders are protected from moves. See [Phase 8 details and supported move scope](docs/PHASE_8_ORGANIZATION.md).
 
 After a Release build with model tests, create a portable validation folder with
 `./tools/package.ps1` (optionally `-Zip`). Run the bundled `verify-package.ps1`
