@@ -1,13 +1,13 @@
 # fileSearcher
 
 A Windows desktop application for local semantic file search, related-file discovery,
-virtual collections and user-approved organization.
+virtual collections, user-approved organization and duplicate cleanup review.
 
 See [the implementation gameplan](IMPLEMENTATION_PLAN.md) for the technology
 stack, architecture, phased roadmap, acceptance criteria, and release checks.
 
-Current status: Phase 8 related files, category suggestions, virtual collections,
-reviewed moves and checked undo implemented locally. Independent-machine deployment and public
+Current status: Phase 9 duplicate and cleanup review implemented and locally validated.
+Independent-machine deployment and public
 distribution checks remain open; this is not yet a public-release sign-off.
 Select local folders, edit exclusions, scan in the background, filter results,
 and open files or show them in Explorer. The index survives restart.
@@ -37,6 +37,15 @@ Move history records plans before filesystem changes, checks source identity/con
 refuses overwrites, and offers reviewed undo. Startup recovery inspects interrupted
 operations without automatically deleting files. Repository, build, application and
 index folders are protected from moves. See [Phase 8 details and supported move scope](docs/PHASE_8_ORGANIZATION.md).
+
+Open **Duplicates & cleanup** in the left sidebar and scan one indexed folder.
+Exact copies are verified by size, SHA-256 and byte comparison. Each review names
+the file to keep; **Send to Recycle Bin** is a separate approval. Similar documents
+and possible versions are discovery-only. Old-installer and generated-build rules
+are off by default. Changed files and unsupported recycling stop the action.
+Cleanup history survives index clearing. Restore recycled files through Windows
+Recycle Bin; the app does not offer cleanup undo or empty the bin. See
+[Phase 9 behavior, checks and limits](docs/PHASE_9_CLEANUP.md).
 
 After a Release build with model tests, create a portable validation folder with
 `./tools/package.ps1` (optionally `-Zip`). Run the bundled `verify-package.ps1`

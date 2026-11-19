@@ -92,6 +92,17 @@ ApplicationWindow {
         title: "Choose a folder to index"
         onAccepted: fileApp.addFolder(selectedFolder, defaultExclusions.text)
     }
+    CleanupPanel {
+        id: cleanupPanel
+        objectName: "cleanupPanel"
+        cleanup: fileApp.cleanup
+        indexedRoots: fileApp.roots
+        selectedFileId: window.selectedFileId
+        anchors.centerIn: parent
+        width: Math.min(980, window.width - 32)
+        height: Math.min(700, window.height - 32)
+        onOpenFileRequested: function(id) { fileApp.openFile(id, false) }
+    }
     Dialog {
         id: exclusionsDialog
         property double rootId: 0
@@ -138,7 +149,7 @@ ApplicationWindow {
             Label { text: "Search index: " + window.readableBytes(fileApp.storageInfo.indexBytes) + " · " + (fileApp.storageInfo.files || 0) + " files · " + (fileApp.storageInfo.vectors || 0) + " AI passages"; wrapMode: Text.WordWrap; Layout.fillWidth: true }
             Label { text: fileApp.storageInfo.indexPath || "Loading storage details…"; textFormat: Text.PlainText; wrapMode: Text.WrapAnywhere; Layout.fillWidth: true; color: "#9fb2c5" }
             Label { text: "AI model: " + window.readableBytes(fileApp.storageInfo.modelBytes); Layout.fillWidth: true }
-            Label { text: "Collections and move history: " + window.readableBytes(fileApp.storageInfo.organizationBytes) + " (kept when clearing the search index)"; wrapMode: Text.WordWrap; Layout.fillWidth: true }
+            Label { text: "Collections, move and cleanup history: " + window.readableBytes(fileApp.storageInfo.organizationBytes) + " (kept when clearing the search index)"; wrapMode: Text.WordWrap; Layout.fillWidth: true }
             Label { text: fileApp.storageInfo.modelPath || ""; textFormat: Text.PlainText; wrapMode: Text.WrapAnywhere; Layout.fillWidth: true; color: "#9fb2c5" }
             RowLayout {
                 Button { text: "Open index folder"; onClicked: fileApp.openStorageFolder(false) }
@@ -234,6 +245,7 @@ ApplicationWindow {
                 Button { text: fileApp.paused ? "Resume indexing" : "Pause indexing"; enabled: fileApp.roots.length > 0; Layout.fillWidth: true; onClicked: fileApp.setPaused(!fileApp.paused) }
                 Button { text: "Rescan folders"; enabled: fileApp.roots.length > 0; Layout.fillWidth: true; onClicked: fileApp.scan() }
                 Button { text: "Reindex file contents"; enabled: fileApp.roots.length > 0 && !fileApp.busy; Layout.fillWidth: true; onClicked: fileApp.reindexContent() }
+                Button { objectName: "cleanupButton"; text: "Duplicates && cleanup"; Layout.fillWidth: true; enabled: fileApp.cleanup !== null; onClicked: cleanupPanel.open() }
                 Label { text: "Text stays on this computer\nLinked and cloud placeholder files are skipped"; wrapMode: Text.WordWrap; Layout.fillWidth: true; color: "#8da3b7"; font.pixelSize: 12; lineHeight: 1.4 }
             }
         }

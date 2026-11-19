@@ -69,11 +69,15 @@ AppController::AppController(const QString& dataDirectory, QObject* parent, Inde
         organizer_=new OrganizationController(dataDirectory_,this);
         organizer_->setAiEnabled(aiEnabled_);
         connect(organizer_,&OrganizationController::filesChanged,this,[this] { loadPreview(0); scan(); });
+        cleanup_=new CleanupController(dataDirectory_,this);
+        cleanup_->setAiEnabled(aiEnabled_);
+        connect(cleanup_,&CleanupController::filesChanged,this,[this] { loadPreview(0); scan(); });
         startSearch();
         scheduler_.start(timing_.tickMs); periodic_.start(timing_.reconcileMs); pollWork();
     } catch (const std::exception& error) { error_ = QString::fromUtf8(error.what()); queue_.reset(); store_.reset(); }
 }
 AppController::~AppController() {
+    delete cleanup_; cleanup_=nullptr;
     delete organizer_; organizer_=nullptr;
     scheduler_.stop(); periodic_.stop();
     disconnect(&directoryWatcher_,nullptr,this,nullptr);
@@ -199,6 +203,7 @@ void AppController::configureAi(bool enabled,int profile) {
     if (settings.status()!=QSettings::NoError) { error_="Cannot save AI preferences."; emit stateChanged(); return; }
     aiEnabled_=enabled; aiProfile_=profile; aiCancelled_->store(true);
     if(organizer_) organizer_->setAiEnabled(enabled);
+    if(cleanup_) cleanup_->setAiEnabled(enabled);
     if (options_.mode==5) startSearch();
     aiStatus_=enabled ? "AI settings saved. Pending chunks will resume." : "AI indexing is off. Keyword search remains available.";
     if (enabled) for (const auto& root:indexedRoots_) queueRoot(root.id,0);
@@ -269,6 +274,7 @@ void AppController::openStorageFolder(bool model) {
 }
 void AppController::clearSavedIndex(bool embeddingsOnly) {
     if(organizer_ && organizer_->busy()) { error_="Wait for the organization operation to finish before clearing the index."; emit stateChanged(); return; }
+    if(cleanup_ && cleanup_->busy()) { error_="Wait for the cleanup operation to finish before clearing the index."; emit stateChanged(); return; }
     if (busy_ || !store_ || !queue_) return;
     searchCancelled_->store(true); ++searchGeneration_; searching_=false;
     ++previewGeneration_; preview_.clear(); previewLoading_=false; emit previewChanged();

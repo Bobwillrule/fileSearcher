@@ -80,6 +80,19 @@ int main(int argc,char** argv) {
         QTest::qWait(200); require(window->grabWindow().save(screenshots+"/phase8-move-review.png"),"Cannot save move review screenshot");
         QMetaObject::invokeMethod(confirmation,"reject"); waitFor([&]{return !organizer->busy();});
         require(QDir(root).entryList(QDir::Files).size()==8 && QDir(destination).entryList(QDir::Files).isEmpty(),"Rejecting a move changed files");
+        QMetaObject::invokeMethod(panel,"close");
+        auto* cleanup=qobject_cast<CleanupController*>(controller.cleanup()); require(cleanup,"Missing cleanup controller"); waitFor([&]{return !cleanup->busy();});
+        auto* cleanupPanel=window->findChild<QObject*>("cleanupPanel"); require(cleanupPanel,"Missing cleanup panel");
+        QMetaObject::invokeMethod(cleanupPanel,"open");
+        cleanup->scan(controller.roots().first().toMap()["rootId"].toLongLong(),false,false); waitFor([&]{return !cleanup->busy();});
+        require(cleanup->candidates().size()==7,"Expected seven separately verified copies");
+        QTest::qWait(250); require(window->grabWindow().save(screenshots+"/phase9-duplicates.png"),"Cannot save cleanup screenshot");
+        cleanup->prepare(cleanup->candidates().first().toMap()["token"].toString()); waitFor([&]{return !cleanup->busy();});
+        auto* cleanupReview=cleanupPanel->findChild<QObject*>("cleanupConfirmation"); require(cleanupReview && cleanupReview->property("visible").toBool(),"Cleanup review did not open");
+        require(cleanupReview->property("height").toDouble()<=window->height(),"Cleanup review exceeds minimum window height");
+        QTest::qWait(250); require(window->grabWindow().save(screenshots+"/phase9-recycle-review.png"),"Cannot save recycling review screenshot");
+        QMetaObject::invokeMethod(cleanupReview,"reject"); waitFor([&]{return !cleanup->busy();});
+        require(QDir(root).entryList(QDir::Files).size()==8,"Rejecting cleanup changed files");
         QTextStream(stdout)<<"Keyboard, selection, clear, focus, storage and minimum-size UI checks passed.\n"; return 0;
     } catch(const std::exception& e) { QTextStream(stderr)<<e.what()<<Qt::endl; return 1; }
 }

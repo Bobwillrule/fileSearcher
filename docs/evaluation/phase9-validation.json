@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-19",
+  "scope": "Local Windows development machine",
+  "release": { "checks_passed": 22, "checks_failed": 0, "seconds": 78.32 },
+  "debug": { "checks_passed": 22, "checks_failed": 0, "seconds": 134.20 },
+  "cleanup_suite_each_build": { "test_cases": 15, "assertions": 260 },
+  "desktop_real_model_each_build": { "test_cases": 3, "assertions": 53 },
+  "package": {
+    "developer_paths_removed": true,
+    "manifest_verified": true,
+    "duplicate_recycle_retains_original": true,
+    "restart_and_clear_preserve_originals": true,
+    "qml_startup_passed": true
+  },
+  "remaining_release_checks": [
+    "Independent clean Windows machine",
+    "Varied filesystems and Recycle Bin policies",
+    "Distribution notices and release checklist"
+  ]
+}

@@ -76,6 +76,17 @@ int main(int argc,char** argv) {
                 organizer->approveMove(organizer->movePlan()["id"].toString()); waitFor([&]{return !organizer->busy() && done(controller);});
                 require(QFileInfo::exists(root+"/diodes.txt") && !QFileInfo::exists(destination+"/diodes.txt"),"Approved undo failed");
                 report["category_tag_move_undo"]=true;
+                const auto duplicate=root+"/z-diodes-copy.txt";
+                require(QFile::copy(root+"/diodes.txt",duplicate),"Cannot create synthetic duplicate"); controller.scan(); waitFor([&]{return done(controller);});
+                auto* cleanup=qobject_cast<CleanupController*>(controller.cleanup()); require(cleanup,"Cleanup controller unavailable"); waitFor([&]{return !cleanup->busy();});
+                cleanup->scan(controller.roots().first().toMap()["rootId"].toLongLong(),false,false); waitFor([&]{return !cleanup->busy();});
+                require(cleanup->candidates().size()==1,"Exact duplicate not discovered");
+                cleanup->prepare(cleanup->candidates().first().toMap()["token"].toString()); waitFor([&]{return !cleanup->busy();}); require(!cleanup->plan().isEmpty(),"Cleanup review unavailable");
+                require(cleanup->plan()["path"].toString()==duplicate,"Cleanup selected unexpected file");
+                cleanup->approve(cleanup->plan()["id"].toString()); waitFor([&]{return !cleanup->busy() && done(controller);});
+                require(!QFileInfo::exists(duplicate) && QFileInfo::exists(root+"/diodes.txt"),"Verified duplicate was not recycled");
+                require(cleanup->history().first().toMap()["state"]=="recycled","Recycle Bin did not confirm completion");
+                report["duplicate_recycle_retains_original"]=true;
             }
             controller.refreshStorage(); waitFor([&]{return controller.storageInfo().contains("files");});
             report["passages"]=QJsonValue::fromVariant(controller.storageInfo()["passages"]);

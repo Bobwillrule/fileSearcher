@@ -1,0 +1,8 @@
+{
+  "Zip": "build/FileSearcher-phase9-local.zip",
+  "Bytes": 142757443,
+  "SHA256": "27d596e7e537e26505db066ef5fd1d2508503c59e6e3e1b9dd039f6209a3dfc8",
+  "ZipEntriesChecked": 1533,
+  "CorruptEntry": null,
+  "ValidationScope": "Local Windows machine with developer paths removed; independent-machine and varied-filesystem/recycle-policy checks remain open"
+}

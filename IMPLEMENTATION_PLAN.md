@@ -360,7 +360,7 @@ Revisit these only after the search MVP is measured and stable:
 - [x] Phase 6: Hybrid search and evaluation (local validation)
 - [ ] Phase 7: Search MVP usability and performance (local implementation validated; independent-machine/public-release gates pending)
 - [x] Phase 8: Related files and organization (local validation; independent deployment and physical cross-volume checks remain open)
-- [ ] Phase 9: Duplicate and cleanup review
+- [x] Phase 9: Duplicate and cleanup review (local validation; independent release checks remain open)
 - [ ] Phase 10: Release readiness
 
 Phase 1 validates real C++ BGE embeddings against PyTorch, HNSW behavior, bundled
@@ -391,7 +391,12 @@ reviewed moves, durable recovery and checked undo. Release tests pass 21/21, fin
 affected Debug checks pass 5/5, and the packaged tag/move/undo workflow passes.
 See [Phase 8 validation and limitations](docs/PHASE_8_ORGANIZATION.md).
 Keep the Phase 7 release gate open
-until its independent checks pass. Phase 9 has not started.
+until its independent checks pass. The user's next instruction authorized Phase 9;
+its implementation adds exact-duplicate review, discovery-only similar/version
+labels, opt-in cleanup rules and separately approved recycling with durable history.
+Release and Debug each pass 22/22 checks, including real Windows recycling and
+abrupt interruption. The packaged duplicate/recycle/retained-original workflow
+also passes. See [Phase 9 notes](docs/PHASE_9_CLEANUP.md). Phase 10 has not started.
 
 ## 10. Primary references
 

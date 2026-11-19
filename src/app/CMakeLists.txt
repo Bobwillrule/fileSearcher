@@ -1,5 +1,5 @@
 qt_add_executable(filesearcher WIN32 main.cpp app_controller.cpp app_controller.h)
-qt_add_qml_module(filesearcher URI FileSearcher VERSION 1.0 QML_FILES Main.qml OrganizationPanel.qml)
+qt_add_qml_module(filesearcher URI FileSearcher VERSION 1.0 QML_FILES Main.qml OrganizationPanel.qml CleanupPanel.qml)
 target_link_libraries(filesearcher PRIVATE filesearcher_core metadata_core content_indexer embedding_indexer organization_core Qt6::Quick Qt6::QuickControls2 Qt6::Concurrent shell32 ole32)
 if(BUILD_TESTING)
   add_test(NAME app_startup COMMAND filesearcher --smoke-test -platform offscreen)

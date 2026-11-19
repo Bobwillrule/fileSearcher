@@ -141,6 +141,10 @@ TEST_CASE("Real BGE passages drive related files and example-based category sugg
     organizer->inspect(selected); waitFor([&]{return !organizer->busy();}); INFO(organizer->message().toStdString());
     REQUIRE(!organizer->related().isEmpty()); CHECK(organizer->related().front().toMap()["fileId"].toLongLong()==example);
     REQUIRE(organizer->suggestions().size()==1); CHECK(organizer->suggestions().front().toMap()["reason"].toString().contains("example"));
+    auto* cleanup=qobject_cast<CleanupController*>(controller.cleanup()); REQUIRE(cleanup); waitFor([&]{return !cleanup->busy();});
+    cleanup->inspect(selected); waitFor([&]{return !cleanup->busy();});
+    REQUIRE(!cleanup->related().isEmpty()); CHECK(cleanup->related().front().toMap()["kind"]=="Similar document"); CHECK(cleanup->plan().isEmpty());
     controller.configureAi(false,1); organizer->inspect(selected); waitFor([&]{return !organizer->busy();});
     CHECK(organizer->suggestions().isEmpty()); CHECK(organizer->related().isEmpty());
+    cleanup->inspect(selected); waitFor([&]{return !cleanup->busy();}); CHECK(cleanup->related().isEmpty());
 }
