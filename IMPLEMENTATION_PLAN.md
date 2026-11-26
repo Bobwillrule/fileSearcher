@@ -361,7 +361,7 @@ Revisit these only after the search MVP is measured and stable:
 - [ ] Phase 7: Search MVP usability and performance (local implementation validated; independent-machine/public-release gates pending)
 - [x] Phase 8: Related files and organization (local validation; independent deployment and physical cross-volume checks remain open)
 - [x] Phase 9: Duplicate and cleanup review (local validation; independent release checks remain open)
-- [ ] Phase 10: Release readiness
+- [ ] Phase 10: Local release checks passed for 0.2.0. Independent clean Windows offline validation pending.
 
 Phase 1 validates real C++ BGE embeddings against PyTorch, HNSW behavior, bundled
 PDF/DOCX extraction, and parser isolation/resource limits. Phase 2 adds selected-folder
@@ -396,7 +396,9 @@ its implementation adds exact-duplicate review, discovery-only similar/version
 labels, opt-in cleanup rules and separately approved recycling with durable history.
 Release and Debug each pass 22/22 checks, including real Windows recycling and
 abrupt interruption. The packaged duplicate/recycle/retained-original workflow
-also passes. See [Phase 9 notes](docs/PHASE_9_CLEANUP.md). Phase 10 has not started.
+also passes. See [Phase 9 notes](docs/PHASE_9_CLEANUP.md). Phase 10 implements release
+packaging and migration recovery for 0.2.0. The independent-machine offline test
+remains pending by agreement. See the [release guide](docs/PHASE_10_RELEASE.md).
 
 ## 10. Primary references
 

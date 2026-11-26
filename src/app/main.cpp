@@ -9,12 +9,13 @@
 #include <QTemporaryDir>
 #include <QElapsedTimer>
 #include "app_controller.h"
+#include "storage/state_backup.h"
 
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
     app.setApplicationName("FileSearcher");
     app.setOrganizationName("FileSearcher");
-    app.setApplicationVersion("0.1.0");
+    app.setApplicationVersion(filesearcher::releaseVersion);
     QQuickStyle::setStyle("Basic");
     QTemporaryDir testDirectory;
     const int dataOption = app.arguments().indexOf("--data-dir");

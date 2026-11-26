@@ -3,6 +3,8 @@
 #include "indexing/content_indexer.h"
 #include "indexing/embedding_indexer.h"
 #include "search/hybrid_search.h"
+#include "storage/state_backup.h"
+#include "cleanup/cleanup_service.h"
 #include <QSettings>
 #include <QRegularExpression>
 #include <QCoreApplication>
@@ -53,8 +55,11 @@ AppController::AppController(const QString& dataDirectory, QObject* parent, Inde
         lock_ = std::make_unique<QLockFile>(QDir(dataDirectory).filePath("index.lock"));
         lock_->setStaleLockTime(0);
         if (!lock_->tryLock()) throw std::runtime_error("This index is already open in another FileSearcher window.");
+        filesearcher::prepareStateUpgrade(dataDirectory_);
         store_ = std::make_unique<filesearcher::MetadataStore>(database_, true);
         queue_ = std::make_unique<filesearcher::WorkQueue>(QDir(dataDirectory).filePath("work.sqlite"));
+        { filesearcher::OrganizationStore organization(dataDirectory_+"/organization.sqlite"); filesearcher::CleanupService cleanupSchema(organization,{},*cancelled_); }
+        filesearcher::finishStateUpgrade(dataDirectory_);
         paused_ = queue_->paused();
         QSettings settings(dataDirectory_+"/preferences.ini",QSettings::IniFormat);
         aiEnabled_=settings.value("ai/enabled",true).toBool();

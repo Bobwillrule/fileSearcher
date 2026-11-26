@@ -6,11 +6,20 @@ $qt = Join-Path $repo '.tools\qt\6.8.3\msvc2022_64'
 if (!$OutputDirectory) { $OutputDirectory = Join-Path $repo ('build\FileSearcher-validation-' + (Get-Date -Format 'yyyyMMdd-HHmmss')) }
 $destination = [IO.Path]::GetFullPath($OutputDirectory)
 if (Test-Path -LiteralPath $destination) { throw 'Choose a new package folder; existing folders are never overwritten.' }
-foreach ($name in @('filesearcher.exe','document_worker.exe','embedding_worker.exe','package_smoke.exe','onnxruntime.dll','zip.dll','z.dll')) {
+$sourceDestination = "$destination-dependency-sources"
+if (Test-Path -LiteralPath $sourceDestination) { throw 'Choose a new source companion folder; existing folders are never overwritten.' }
+$inventoryPath = "$repo\.tools\release-notices\source-inventory.json"
+if (!(Test-Path -LiteralPath $inventoryPath)) { throw 'Run tools/prepare_release_sources.py before creating a Phase 10 package.' }
+$sourceInventory = @(Get-Content -LiteralPath $inventoryPath -Raw | ConvertFrom-Json)
+foreach ($entry in $sourceInventory) {
+    if (!$entry.sdk_revision_matches) { throw 'Dependency source revision has not been verified.' }
+    if ((Get-FileHash -LiteralPath "$repo\.tools\release-sources\$($entry.archive)").Hash -ne $entry.sha256) { throw 'Dependency source checksum mismatch.' }
+}
+foreach ($name in @('filesearcher.exe','document_worker.exe','embedding_worker.exe','package_smoke.exe','state_backup.exe','onnxruntime.dll','zip.dll','z.dll')) {
     if (!(Test-Path -LiteralPath (Join-Path $build $name))) { throw "Missing $name. Build windows-release with -ModelTests first." }
 }
 New-Item -ItemType Directory -Path $destination | Out-Null
-foreach ($name in @('filesearcher.exe','document_worker.exe','embedding_worker.exe','package_smoke.exe','onnxruntime.dll','zip.dll','z.dll')) {
+foreach ($name in @('filesearcher.exe','document_worker.exe','embedding_worker.exe','package_smoke.exe','state_backup.exe','onnxruntime.dll','zip.dll','z.dll')) {
     Copy-Item -LiteralPath (Join-Path $build $name) -Destination $destination
 }
 $savedPath = $env:PATH
@@ -33,6 +42,16 @@ $licenses = New-Item -ItemType Directory -Path "$destination\licenses"
 Copy-Item -LiteralPath "$repo\docs\licenses\BGE-MIT.txt" -Destination $licenses
 Copy-Item -LiteralPath "$repo\docs\PACKAGE_VALIDATION.md" -Destination "$destination\READ-ME-FIRST.md"
 Copy-Item -LiteralPath "$qt\sbom" -Destination "$licenses\qt-sbom" -Recurse
+New-Item -ItemType Directory -Path "$licenses\qt-source-notices" | Out-Null
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+foreach ($entry in $sourceInventory) {
+    [IO.Compression.ZipFile]::CreateFromDirectory("$repo\.tools\release-notices\$($entry.notice_directory)","$licenses\qt-source-notices\$($entry.module).zip")
+}
+Copy-Item -LiteralPath $inventoryPath -Destination "$licenses\source-inventory.json"
+foreach ($name in @('LGPL-3.0-only.txt','GPL-3.0-only.txt')) {
+    Copy-Item -LiteralPath "$repo\.tools\release-notices\qtbase\LICENSES\$name" -Destination $licenses
+}
+Copy-Item -LiteralPath "$repo\LICENSE","$repo\THIRD_PARTY_NOTICES.md" -Destination $destination
 foreach ($name in @('hnswlib','libzip','zlib')) {
     Copy-Item -LiteralPath "$build\vcpkg_installed\x64-windows\share\$name\copyright" -Destination "$licenses\$name.txt"
 }
@@ -47,12 +66,23 @@ $fixtures = New-Item -ItemType Directory -Path "$destination\smoke-fixtures"
 Copy-Item -LiteralPath "$repo\build\fixtures\text.pdf" -Destination "$fixtures\reference.pdf"
 Copy-Item -LiteralPath "$repo\build\fixtures\notes.docx" -Destination "$fixtures\reference.docx"
 Copy-Item -LiteralPath "$PSScriptRoot\verify-package.ps1" -Destination $destination
+Copy-Item -LiteralPath "$PSScriptRoot\verify-release-lifecycle.ps1","$PSScriptRoot\verify-clean-machine.ps1" -Destination $destination
 $source = New-Item -ItemType Directory -Path "$destination\source"
-foreach ($name in @('src','tests','tools','docs','CMakeLists.txt','CMakePresets.json','vcpkg.json','README.md','IMPLEMENTATION_PLAN.md')) {
+foreach ($name in @('src','tests','tools','docs','CMakeLists.txt','CMakePresets.json','vcpkg.json','README.md','IMPLEMENTATION_PLAN.md','LICENSE','THIRD_PARTY_NOTICES.md')) {
     Copy-Item -LiteralPath (Join-Path $repo $name) -Destination $source -Recurse
 }
+$commit = & git -C $repo rev-parse HEAD
+$dirty = [bool](& git -C $repo status --porcelain)
+[pscustomobject]@{ version='0.2.0'; channel='local-validation'; source_base_commit=$commit; source_has_uncommitted_changes=$dirty; qt='6.8.3'; onnxruntime='1.23.2'; source_companion=(Split-Path -Leaf $sourceDestination); independent_machine_test='pending'; built_with_model_tests=$true } | ConvertTo-Json | Set-Content -LiteralPath "$destination\release-metadata.json" -Encoding utf8
+New-Item -ItemType Directory -Path $sourceDestination | Out-Null
+foreach ($entry in $sourceInventory) { Copy-Item -LiteralPath "$repo\.tools\release-sources\$($entry.archive)" -Destination $sourceDestination }
+Copy-Item -LiteralPath $inventoryPath -Destination "$sourceDestination\source-inventory.json"
+Copy-Item -LiteralPath "$repo\THIRD_PARTY_NOTICES.md" -Destination "$sourceDestination\READ-ME.md"
 Get-ChildItem -LiteralPath $destination -File -Recurse | Sort-Object FullName | ForEach-Object {
     [pscustomobject]@{ path=$_.FullName.Substring($destination.Length+1).Replace('\','/'); bytes=$_.Length; sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant() }
 } | ConvertTo-Json -Depth 3 | Set-Content -LiteralPath "$destination\manifest.json" -Encoding utf8
-if ($Zip) { Compress-Archive -LiteralPath $destination -DestinationPath "$destination.zip" -CompressionLevel Optimal }
+if ($Zip) {
+    [IO.Compression.ZipFile]::CreateFromDirectory($destination,"$destination.zip",[IO.Compression.CompressionLevel]::Optimal,$true)
+    [IO.Compression.ZipFile]::CreateFromDirectory($sourceDestination,"$sourceDestination.zip",[IO.Compression.CompressionLevel]::NoCompression,$true)
+}
 Write-Output "Validation package: $destination"

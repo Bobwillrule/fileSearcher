@@ -1,4 +1,4 @@
-param([string]$PackageDirectory = $PSScriptRoot, [switch]$Scale)
+param([string]$PackageDirectory = $PSScriptRoot, [switch]$Scale, [switch]$ObserveTcp)
 $ErrorActionPreference = 'Stop'
 $package = (Resolve-Path -LiteralPath $PackageDirectory).Path
 $manifest = Get-Content -LiteralPath "$package\manifest.json" -Raw | ConvertFrom-Json
@@ -17,7 +17,22 @@ try {
     $env:QT_QPA_FONTDIR = "$env:SystemRoot\Fonts"
     $env:QT_QUICK_BACKEND = 'software'; $env:QT_FORCE_STDERR_LOGGING = '1'
     $arguments = if ($Scale) { '--scale' } else { '--check' }
-    $process = Start-Process -FilePath "$package\package_smoke.exe" -WorkingDirectory $logs -ArgumentList $arguments -WindowStyle Hidden -PassThru -Wait -RedirectStandardOutput "$logs\workflow.json" -RedirectStandardError "$logs\workflow-errors.log"
+    $process = Start-Process -FilePath "$package\package_smoke.exe" -WorkingDirectory $logs -ArgumentList $arguments -WindowStyle Hidden -PassThru -RedirectStandardOutput "$logs\workflow.json" -RedirectStandardError "$logs\workflow-errors.log"
+    $samples=0; $connections=0; $observed=@{}
+    if($ObserveTcp) {
+        while(!$process.HasExited) {
+            $ids=@{}
+            foreach($worker in @(Get-Process -Name package_smoke,embedding_worker,document_worker -ErrorAction SilentlyContinue)) {
+                if($worker.Path -and [IO.Path]::GetDirectoryName($worker.Path) -eq $package) { $ids[[string]$worker.Id]=$true; $observed[$worker.ProcessName]=$true }
+            }
+            $rows=& "$env:SystemRoot\System32\netstat.exe" -ano -p tcp
+            if($LASTEXITCODE -ne 0) { throw 'TCP sampling failed.' }
+            foreach($line in $rows) { $fields=$line.Trim() -split '\s+'; if($fields.Length -eq 5 -and $fields[0] -eq 'TCP' -and $ids.ContainsKey($fields[4]) -and $fields[3] -ne 'LISTENING') { $connections++ } }
+            $samples++; Start-Sleep -Milliseconds 100
+        }
+        [pscustomobject]@{samples=$samples;observed_processes=@($observed.Keys);ipv4_tcp_connection_observations=$connections;scope='Sampled local synthetic workflow. Short-lived traffic, IPv6 and UDP are outside this measurement.'} | ConvertTo-Json | Set-Content -LiteralPath "$logs\tcp.json" -Encoding utf8
+    }
+    $process.WaitForExit()
     Get-Content -LiteralPath "$logs\workflow.json"
     if ($process.ExitCode -ne 0) { throw "Packaged workflow failed ($($process.ExitCode)). See $logs" }
     $process = Start-Process -FilePath "$package\filesearcher.exe" -WorkingDirectory $logs -ArgumentList '--smoke-test -platform offscreen' -WindowStyle Hidden -PassThru -Wait -RedirectStandardError "$logs\ui-errors.log"

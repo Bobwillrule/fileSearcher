@@ -1,0 +1,10 @@
+{
+  "samples": 74,
+  "observed_processes": [
+    "package_smoke",
+    "embedding_worker",
+    "document_worker"
+  ],
+  "ipv4_tcp_connection_observations": 0,
+  "scope": "Sampled local synthetic workflow. Short-lived traffic, IPv6 and UDP are outside this measurement."
+}

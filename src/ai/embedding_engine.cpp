@@ -11,8 +11,8 @@ struct EmbeddingEngine::Impl {
     Ort::Session session{nullptr};
     std::string outputName;
     Impl(const QString& directory,int threads) {
-        verifyModelAssets(directory);
         environment.DisableTelemetryEvents();
+        verifyModelAssets(directory);
         Ort::SessionOptions options;
         options.SetIntraOpNumThreads(std::clamp(threads,1,4)); options.SetInterOpNumThreads(1);
         options.DisableCpuMemArena(); options.DisableMemPattern();

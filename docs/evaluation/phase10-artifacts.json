@@ -1,0 +1,12 @@
+{
+  "FileSearcher-0.2.0.zip": {
+    "sha256": "8ae51c60db979c42bd8273c0a7e1f939df0fb201053766a101e1401e94d65236",
+    "bytes": 145717243,
+    "verified_members": 1543
+  },
+  "FileSearcher-0.2.0-dependency-sources.zip": {
+    "sha256": "e8349bc10ec295a30cfbf1e368c687919c8d1392d882b26c5f05b5c8b52d6e7f",
+    "bytes": 657675716,
+    "verified_members": 4
+  }
+}

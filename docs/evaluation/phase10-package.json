@@ -1,0 +1,12 @@
+{
+    "ai_enabled": true,
+    "category_tag_move_undo": true,
+    "duplicate_recycle_retains_original": true,
+    "index_ms": 3005,
+    "max_heartbeat_gap_ms": 12,
+    "passages": 3,
+    "physical_large_documents": 2,
+    "physical_small_files": 1,
+    "restart_and_clear_preserve_originals": true,
+    "ui_heartbeat_ticks": 300
+}

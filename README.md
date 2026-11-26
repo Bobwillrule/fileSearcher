@@ -6,9 +6,9 @@ virtual collections, user-approved organization and duplicate cleanup review.
 See [the implementation gameplan](IMPLEMENTATION_PLAN.md) for the technology
 stack, architecture, phased roadmap, acceptance criteria, and release checks.
 
-Current status: Phase 9 duplicate and cleanup review implemented and locally validated.
-Independent-machine deployment and public
-distribution checks remain open; this is not yet a public-release sign-off.
+Version 0.2.0 is a Windows release candidate. It backs up existing state before upgrade
+and includes a restore tool, dependency notices and a corresponding source companion.
+The independent clean Windows offline test is pending. See the [release guide](docs/PHASE_10_RELEASE.md).
 Select local folders, edit exclusions, scan in the background, filter results,
 and open files or show them in Explorer. The index survives restart.
 Selected folders are watched for changes, checked at startup, and reconciled
@@ -47,7 +47,8 @@ Cleanup history survives index clearing. Restore recycled files through Windows
 Recycle Bin; the app does not offer cleanup undo or empty the bin. See
 [Phase 9 behavior, checks and limits](docs/PHASE_9_CLEANUP.md).
 
-After a Release build with model tests, create a portable validation folder with
+After a Release build with model tests, run `tools/prepare_release_sources.py`
+with the development Python environment, then create a portable validation folder with
 `./tools/package.ps1` (optionally `-Zip`). Run the bundled `verify-package.ps1`
 from the generated folder to check it without developer paths. Add `-Scale`
 for the physical-file indexing workload. See [package instructions and remaining

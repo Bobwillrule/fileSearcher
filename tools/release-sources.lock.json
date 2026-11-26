@@ -1,0 +1,11 @@
+{
+  "version": "6.8.3",
+  "archives": [
+    { "module": "qtbase", "sha256": "56001b905601bb9023d399f3ba780d7fa940f3e4861e496a7c490331f49e0b80" },
+    { "module": "qtdeclarative", "git": "https://code.qt.io/qt/qtdeclarative.git", "revision": "2ec235a2235a119887683e55787b93f99dc5f12f", "archive": "qtdeclarative-2ec235a2235a119887683e55787b93f99dc5f12f.tar.gz", "sha256": "95b4157f1cf7dbefdee6f95d37783ca2cb4dc2fbeb21dc6f9f83656badd1cf0e" },
+    { "module": "qtsvg", "sha256": "35eb516460f00f264eb504baa253432384351cf23fb9980a5857190e8deef438" },
+    { "module": "qtwebengine", "sha256": "df4e19ba2b3a540551b6f998d62597377ffa688c1cff564589b7da2e2bf87337" }
+  ],
+  "origin": "https://download.qt.io/archive/qt/6.8/6.8.3/submodules/",
+  "note": "Release archive hashes are from official .mirrorlist pages. Qt Quick uses the SDK's exact git revision, archived with git archive (hash recorded locally). Qt WebEngine source contains Qt PDF/PDFium; no Qt WebEngine runtime is shipped."
+}
