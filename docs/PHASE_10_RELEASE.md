@@ -1,6 +1,8 @@
 # FileSearcher 0.2.0 release candidate
 
-Extract the Windows x64 application ZIP into a dedicated folder and run `filesearcher.exe`. The model and document readers are bundled. Keep your documents in separate folders. The adjacent dependency-source ZIP is for redistribution and rebuilding Qt. FileSearcher's own code remains all rights reserved. See [package instructions](PACKAGE_VALIDATION.md) and [dependency notices](../THIRD_PARTY_NOTICES.md).
+For a standard Windows install, run `FileSearcher-Setup.exe`, then open **FileSearcher** from Start. Setup installs for the current user under `%LOCALAPPDATA%\Programs\FileSearcher`. If the required Microsoft Visual C++ runtime is missing, Setup requests administrator approval to install the bundled prerequisite. Remove FileSearcher through Windows Installed apps. The local candidate installer is unsigned.
+
+For the portable option, extract `FileSearcher-0.2.0-Portable-x64.zip` into a dedicated folder and run `filesearcher.exe`. Both options contain the local model and document readers. Keep your documents in separate folders. The adjacent dependency-source ZIP is for redistribution and rebuilding Qt. FileSearcher's own code remains all rights reserved. See [package instructions](PACKAGE_VALIDATION.md) and [dependency notices](../THIRD_PARTY_NOTICES.md).
 
 ## Upgrade and recovery
 
@@ -26,6 +28,13 @@ Use the [build instructions](../README.md), then run the following from the repo
 .\tools\package.ps1 -OutputDirectory build\FileSearcher-0.2.0 -Zip
 .\tools\verify-package.ps1 -PackageDirectory build\FileSearcher-0.2.0 -ObserveTcp
 .\tools\verify-release-lifecycle.ps1 -PackageDirectory build\FileSearcher-0.2.0
+```
+
+To produce the installer and portable downloads from that ZIP, use Inno Setup 7.1.1. The output folder must be new. The script checks the package contents against the manifest and writes both artifacts and `SHA256SUMS.txt`.
+
+```powershell
+.\tools\build-downloads.ps1 -PortableZip build\FileSearcher-0.2.0.zip -OutputDirectory build\downloads-0.2.0 -Compiler 'C:\path\to\ISCC.exe'
+.\tools\verify-setup.ps1 -SetupExe build\downloads-0.2.0\FileSearcher-Setup.exe
 ```
 
 On the independent clean Windows PC, disconnect networking and run `verify-clean-machine.ps1 -RequireOffline` from the extracted package. Record the machine, runtime prerequisite, fonts, DPI, keyboard navigation and Windows Recycle Bin behavior using the checklist in the package instructions. **This independent test is pending by agreement.**

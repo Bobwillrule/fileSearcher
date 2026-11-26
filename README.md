@@ -3,6 +3,14 @@
 A Windows desktop application for local semantic file search, related-file discovery,
 virtual collections, user-approved organization and duplicate cleanup review.
 
+## Download for Windows x64
+
+[Download the setup EXE](https://github.com/Bobwillrule/fileSearcher/releases/download/v0.2.0-rc.1/FileSearcher-Setup.exe) for a guided installation and a Start menu shortcut.
+For the portable edition, [download the ZIP](https://github.com/Bobwillrule/fileSearcher/releases/download/v0.2.0-rc.1/FileSearcher-0.2.0-Portable-x64.zip), extract it, and open `filesearcher.exe`.
+Both editions include the local search model. The [0.2.0 release candidate page](https://github.com/Bobwillrule/fileSearcher/releases/tag/v0.2.0-rc.1) includes checksums, dependency sources, and testing notes.
+
+## Project overview
+
 See [the implementation gameplan](IMPLEMENTATION_PLAN.md) for the technology
 stack, architecture, phased roadmap, acceptance criteria, and release checks.
 
